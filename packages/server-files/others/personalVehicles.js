@@ -231,21 +231,7 @@ global.give_player_vehicle = function(player, model, message = 0, admin = 'none'
         sendMessage(player, 'ff4d4d', `You received a vehicle ${model} from ${admin}.`);
 }
  
-mp.events.addCommand('addvehicle', (player, _, vehicle, price, stock) => {
 
-    if(!vehicle || !price || !stock)
-        return sendUsage(player, '/addvehicle [model] [price] [stock]');
-        
-    loaded_dealer_vehicles = loaded_dealer_vehicles + 1; //Update total vehicles  
-     
-    gm.mysql.handle.query('INSERT INTO `server_dealership_vehicles` SET dealerModel = ?, dealerPrice = ?, dealerStock = ?', [vehicle, price, stock], function(err, res) {
-
-        if(err)
-            return console.log(`Error: ${err}`);
-
-        sendAdmins(COLOR_ADMIN, `(Notice):!{ffffff} ${player.name} added a ${model} in Dealership (stock: ${stock} price: ${price}$).`); 
-    });
-}); 
  
 mp.events.add('loadPlayerVehicles', (player, playerSQLID) => {
 
@@ -482,12 +468,7 @@ mp.events.add("personalVehicleLock", (player, vehicle) => {
         }
     });
 });
- 
-mp.events.addCommand('gotods', (player) => {
-
-    player.position = new mp.Vector3(-57.110, -1096.947, 26.422);
-}); 
- 
+  
 //All vehicles 
 setInterval(() => {
 
@@ -496,11 +477,13 @@ setInterval(() => {
     {
         if(players.vehicle && !players.vehicleModelHaveEngine(players.vehicle.model)) 
         { 
+            player.vehicle.engine = false;
             const vehicle = players.vehicle; 
             const actualGass = vehicle.getVariable('vehicleGass');
 
             if(actualGass > 0 && vehicle.getVariable('engineStatus') == true)
             {
+                player.vehicle.engine = false;
                 vehicle.setVariable('vehicleGass', actualGass - 1); 
 
                 players.call("update_speedometer_gass", []);
@@ -535,201 +518,3 @@ global.update_vehicle_odometer = function(player)
     } 
 } 
  
-////////////////////////////////////////////////////////////////////////////////TUNNING VEHICLE////////////////////////////////////////////////////////////////////////////////
-
-const tunning_park_position = 
-[
-    [-377.5419, -146.8859, 38.26020, 298.86749267578125],
-    [-379.5124, -143.6734, 38.26670, 299.52850341796875],
-    [-381.2011, -140.8381, 38.26032, 299.0257568359375],
-    [-389.7508, -125.3932, 38.25983, 303.1075134277344],
-    [-391.4732, -122.4010, 38.23715, 302.7746276855469],
-    [-393.1938, -119.3748, 38.16837, 302.59881591796875]
-];
- 
-function get_components_money(player)
-{
-    var money = 0;
-
-    for(let x = 0; x < player.tunning_components.length; x++)
-    { 
-        money += player.tunning_components[x].price; 
-    } 
-
-    return money;
-}
-
-mp.events.add('start_tunning', (player) => { // - terminat
- 
-    /*player.tunning_components = [];
- 
-    player.vehicle.dimension = (player.id + 300);   
-    player.vehicle.position = new mp.Vector3(-336.1090, -135.5913, 38.6496 + 0.3);
-    player.vehicle.rotation = new mp.Vector3(0.0, 0.0, 240.02175903320312);
-    
-    player.call('freezePlayer', [true]);
-    player.call("start_tunning_cef", []);   */
-});
- 
-mp.events.add('apply_tunning', (player, option, method) => {
-
-    switch(option)
-    { 
-        //PAY WITH CARD
-        case 0:
-        {
-            //UPDATE CARD MONEY   
-            player.give_money_bank(1, get_components_money(player));
-        
-            //MESSAGES
-            sendMessage(player, '0AAE59', `(Tunning):!{ffffff} You buy ${player.tunning_components.length} items for ${player.formatMoney(get_components_money(player), 0)}$ with (!{3AAED8}Card!{ffffff}).`);
-
-            //ADD ITEMS ON VEHICLE
-            apply_tunning_vehicle(player);
-            break;
-        }
-
-        //PAY WITH CASH
-        case 1: 
-        { 
-            //REMOVE MONEY FROM HAND 
-            player.giveMoney(1, get_components_money(player));
- 
-            //MESSAGES
-            sendMessage(player, '0AAE59', `(Tunning):!{ffffff} You buy ${player.tunning_components.length} items for ${player.formatMoney(get_components_money(player), 0)}$ with (!{0AAE59}Cash!{ffffff}).`);
-        
-            //ADD ITEMS ON VEHICLE
-            apply_tunning_vehicle(player);
-            break;
-        }
-
-        //RESET
-        case 2:
-        {
-            player.tunning_components = [];
-            sendMessage(player, '0AAE59', `Tunning items has been reseted.`);
-            break;
-        }
-
-        //CHECKOUT
-        case 3:
-        {
-            var textItems = '';
-            var moneyTotal = 0;
-
-            for(let x = 0; x < player.tunning_components.length; x++)  
-            {   
-                textItems += `<img src = "images/right-arrow.png" style="width: 15px;"> ${player.tunning_components[x].name} - <span style = "color:#00802b;">${player.formatMoney(player.tunning_components[x].price, 0)}</span>$<br>`;
-            
-                moneyTotal += player.tunning_components[x].price; 
-            }  
- 
-            player.call("tunning_checkout", [textItems, player.formatMoney(moneyTotal, 0)]);   
-            break
-        }
- 
-        //CLOSE CEF
-        case 4: 
-        {
-            //UNFREEZE
-            player.call('freezePlayer', [false]);
-
-            //DESTROY CAMERA
-            player.call('destroy_tunning_camera');
-
-            //SET DIMENSION
-            player.dimension = 0;
-
-            //PUT VEHICLE IN PARK POSITION
-            const spawn = tunning_park_position[Math.floor(Math.random() * tunning_park_position.length)];
-
-            player.vehicle.dimension = 0;   
-            player.vehicle.position = new mp.Vector3(spawn[0], spawn[1], spawn[2]);
-            player.vehicle.rotation = new mp.Vector3(0.0, 0.0, spawn[3]); 
-            break; 
-        }
-    } 
-});
- 
-mp.events.addCommand('skema', (player) => {
-
-    const spawn = tunning_park_position[Math.floor(Math.random() * tunning_park_position.length)];
-
-    player.vehicle.dimension = 0;   
-    player.vehicle.rotation = new mp.Vector3(0.0, 0.0, spawn[3]); 
-    player.vehicle.position = new mp.Vector3(spawn[0], spawn[1], spawn[2]); 
-});
-
-
-function apply_tunning_vehicle(player)
-{   
-
-    //UNFREEZE
-    player.call('freezePlayer', [false]);
-
-    //DESTROY CAMERA
-    player.call('destroy_tunning_camera');
-
-    //SET DIMENSION
-    player.dimension = 0;
-
-
-    sendMessage(player, '0AAE59', `applied`);
-}
-
-mp.events.addCommand('mod', (player, _, modType , modIndex) => {
-	if(!player.vehicle) return player.outputChatBox("You need to be in a vehicle to use this command.");
-	player.vehicle.setMod(parseInt(modType), parseInt(modIndex));
-	player.outputChatBox(`Mod Type ${modType} with Mod Index ${modIndex} applied.`);
-});
-
-mp.events.add('add_components', (player, componentName, componentPrice, componentIndex, componentType) => {
-  
-    //ADD NEW COMPONENT  
-    if(!player.tunning_components.length)
-    { 
-        player.tunning_components.push({ name: componentName, price: componentPrice, index: componentIndex, type: componentType });    
-    } 
-    else 
-    {
-        for(let x = 0; x < player.tunning_components.length; x++)  
-        { 
-            //ITEM ALREADY EXIST AND EDIT THIS 
-            if(player.tunning_components[x].index == componentIndex)
-            {
-                player.tunning_components[x].name = componentName;
-                player.tunning_components[x].price = componentPrice;
-                player.tunning_components[x].index = componentIndex;
-                player.tunning_components[x].type = componentType; 
-            }
-            
-            //ITEM NOT EXIST AND CREATE THIS
-            else
-            { 
-                player.tunning_components.push({ name: componentName, price: componentPrice, index: componentIndex, type: componentType });    
-            } 
-            break;
-        }
-    }
- 
-    //ADD ITEMS ON CAR
-    for(let x = 0; x < player.tunning_components.length; x++)
-    { 
-        player.vehicle.setMod(player.tunning_components[x].index, player.tunning_components[x].type); 
-    }  
-});
-
-mp.events.add('on_vehicle_tunning_move', (player, x) => {
-  
-    if(player.vehicle)
-    {    
-        player.vehicle.rotation = new mp.Vector3(0, 0, x); 
-    }  
-});
-
-/*
-    - Adaugata functia de show vehicle
-    - Adaugata functia de spawn/destroy vehicle
-    - Adaugata functia de lock/unlock vehicle
-    - Adaugata functia de vizualizare informatii cand te urci in vehicul 
-*/  

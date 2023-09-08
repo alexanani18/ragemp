@@ -33,8 +33,15 @@ require('./player/commands.js')
 require('./player/playerFunctions.js') 
                                      
 //Admin folders
-require('./admin/adminCommands.js');
-require('./admin/adminFunctions.js') 
+require('./admin/admin1.js');
+require('./admin/admin2.js');
+require('./admin/admin3.js');
+require('./admin/admin4.js');
+require('./admin/admin5.js');
+require('./admin/admin6.js');
+require('./admin/admin7.js');
+require('./admin/reports.js');
+require('./admin/need_think.js');
 
 //DMV server
 require('./dmv/index.js')   
