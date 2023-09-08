@@ -1,0 +1,109 @@
+<!doctype html> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html body {
+		    background-color: rgba(0, 0, 0, 0.0); 
+		}
+ 
+        .progress-icon {
+            font-size: 3rem;
+            color: white;
+
+            position: absolute;
+            bottom: 2%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .progress{
+            position: absolute;
+            left: 50%;
+            bottom: 3%;
+            transform: translateX(-50%);
+            margin: 4px;
+            float:left;
+            text-align: center;
+        }
+        .barOverflow{
+            position: relative;
+            overflow: hidden;
+            width: 180px; height: 90px;
+            margin-bottom: -14px;
+        }
+        .bar{
+            position: absolute;
+            top: 0; left: 0;
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            border: 5px solid #eee;
+            border-bottom-color: #0bf;
+            border-right-color: #0bf;
+            transform: rotate(45deg);
+            transition: transform 1s linear;
+        } 
+        
+        .round-info { 
+            position: absolute;
+            top: 91%;
+            left: 50.3%;
+           
+            transform: translateX(-50%);
+            text-align: center; 
+        }
+    </style> 
+ 
+</head>
+<body> 
+
+    <div class = "round-info">
+ 
+        <img src="images/medal.png" style="width: 40px;">
+
+        <br>
+
+        <div style="font-size: 13px; font-family: 'Montserrat'; font-weight: 600; color: #BDBDBD; height: 80px;">
+        
+            Exam progress
+
+            <br>
+
+            <a id = "exam_progress"></a> 
+        </div> 
+    </div>
+
+    <div class="progress">
+        <div class="barOverflow">
+            <div class="bar"></div>
+        </div>
+    </div>
+
+ 
+    <script> 
+        const bar = document.querySelector('.bar');
+        const progressIcon = document.querySelector('.progress-icon');
+
+        function setProgressBar(percent) {
+  
+            bar.style.transform = `rotate(${45 + percent * 1.8}deg)`;
+
+            document.getElementById('exam_progress').innerHTML = `${percent / 10}/9 points`;
+        }
+ 
+    </script> 
+
+    <script src="serverDMV.js"></script> 
+</body>
+</html>

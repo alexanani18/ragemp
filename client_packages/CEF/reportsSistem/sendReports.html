@@ -1,0 +1,100 @@
+<!DOCTYPE html> 
+<html>
+
+<head>
+	
+	<!-- Custom Style --> 
+	<style type = "text/css">
+		html body {
+		    background-color: rgba(0, 0, 0, 0.0);
+            user-select: none;
+		} 
+	</style>
+
+	<!-- Fontawesome CDN & Bootstrap 4 CDN-->
+	<link href = "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel = "stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin = "anonymous"> 
+	<link href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel = "stylesheet" integrity = "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin = "anonymous">  
+	<script src = "reports.js"></script>  
+</head>
+
+<body>  
+	<div class = "container" style = "margin-top: 15%; opacity: 0.8;">
+		<div class = "row mx-auto align-item-center justify-content-center">
+			<div class = "col-md-6">
+
+				<div class = "card text-light" style = "background-color: #000000;">
+ 
+					<div class = "card-header">
+						<i class = "fa fa-ticket"></i> Send Report 
+					</div> 
+					<div class="card-body"> 
+
+                        <form>  
+                            <label for = "reportPlayer"><i class = "fa fa-user" aria-hidden = "true"></i> Username</label>
+                            <input type = "username" class = "form-control" id = "reportPlayer" placeholder = "Username">
+                            <br>
+
+                            <label for = "exampleFormControlTextarea1"><i class = "fa fa-exclamation-triangle"></i> Report priority</label>
+                            <br>
+                            
+                            <div class="form-check form-check-inline">
+                                <input class = "form-check-input" type = "radio" name = "inlineRadioOptions" id = "inlineRadio1" value = "low">
+                                <label class = "form-check-label" for = "inlineRadio1"><span class = "badge badge-pill badge-warning">low</span></label>
+                            </div>
+                            
+                            <div class="form-check form-check-inline">
+                                <input class = "form-check-input" type = "radio" name="inlineRadioOptions" id = "inlineRadio2" value = "medium">
+                                <label class = "form-check-label" for = "inlineRadio2"><span class="badge badge-pill badge-success">medium</span></label>
+                            </div>
+                        
+                            <div class="form-check form-check-inline">
+                                <input class = "form-check-input" type = "radio" name = "inlineRadioOptions" id = "inlineRadio3" value="high">
+                                <label class = "form-check-label" for = "inlineRadio3"><span class = "badge badge-pill badge-danger">high</span></label>
+							</div>
+						  
+                            <div class="form-group">
+                                <br>
+                                <label for = "reportReason"><i class = "fa fa-comment-o" aria-hidden = "true"></i> Report details</label>
+                                <textarea class = "form-control" id = "reportReason" rows = "3"></textarea>
+                            </div>
+						</form> 
+
+						<center>
+
+							<button type = "button" class = "btn btn-outline-success btn-sm" onclick = "asdasdasdasd();">Send <i class="fa fa-check"></i></button>
+							<button type = "button" class = "btn btn-outline-danger btn-sm" onclick = "clickSendReport(0);">Close <i class="fa fa-close"></i></button>
+
+						</center> 
+					</div> 
+				</div> 
+			</div>
+		</div>
+	</div>  
+
+
+	<script>
+   
+		const availableInputs = ['input', 'textarea']; 
+		availableInputs.forEach(inputName => {
+		    const inputs = document.querySelectorAll(inputName);
+		    inputs.forEach(input => {
+				
+				input.addEventListener("focus", () => {
+					mp.trigger('ToggleChat', 1, true, false);
+				});
+				
+				input.addEventListener("focusout", (e) => {
+					mp.trigger('ToggleChat', 1, false, false);
+				});
+		    });
+		}); 
+
+
+		function asdasdasdasd()
+		{
+			const reportSelected = document.querySelector('input:checked');
+            clickSendReport(1, reportSelected.value);
+		} 
+	</script> 
+</body> 
+</html>

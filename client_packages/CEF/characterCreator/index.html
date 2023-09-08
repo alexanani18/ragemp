@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<!-- Custom Style --> 
+	<style type="text/css">
+		html body {
+		    background-color: rgba(0, 0, 0, 0.0);
+			user-select: none; 
+		}
+		body .container {
+		    margin-top: 15%;
+			margin-left: 40%; 
+		} 
+
+		.round {
+			background-color: #383A40;  
+			padding: 0.5px 20px;  
+			width: 380px; 
+			border-radius: 200px;
+			
+			display: flex;
+            justify-content: space-between;
+		} 
+
+		::-webkit-scrollbar {
+			width: 5px; 
+            display: block;
+		}
+
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+			background: #1a75ff;
+			border-radius: 200px;
+		}
+
+		/* Handle on hover */
+		::-webkit-scrollbar-thumb:hover {
+			background: rgb(134, 134, 134);
+		} 
+ 
+		.scroll {
+			overflow-y: scroll;
+			width: 400px;
+			height: 400px; 
+		}
+
+		.item 
+		{
+			padding: 1px; 
+			width: 20px;
+			height: 20px; 
+		}
+
+		.roundSlider
+		{
+			background-color: #383A40; 
+		    width: 380px;
+			border-radius: 300px;
+ 
+		    text-align: center;
+		}
+
+		input[type="range"] {
+			-webkit-appearance: none;
+			background: #383A40;
+		}
+
+		input[type="range"]:focus {
+			outline: none;
+			background: #383A40;
+		}
+
+		input[type="range"]::-webkit-slider-runnable-track {
+			background: tomato;
+			height: 5px;
+		}
+
+		input[type="range"]::-moz-range-track {
+			background: tomato;
+			height: 5px;
+		}
+
+		input[type="range"]::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			height: 15px;
+			width: 15px;
+			background: pink;
+			margin-top: -5px;
+			border-radius: 50%;
+		}
+
+		input[type="range"]::-moz-range-thumb {
+			height: 15px;
+			width: 15px;
+			background: #000000; 
+			margin-top: -5px;
+			border-radius: 50%;
+		}
+
+
+	</style>
+
+	<!-- Fontawesome CDN -->
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
+	<!-- Bootstrap 4 CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
+ 
+
+</head>
+
+<body>
+  
+	<div class = "container ">
+		<div class = "row mx-auto align-item-right justify-content">
+			<div class="col-md-3.5 ml-auto">
+
+				<div class = "card text-light" style = "background-color: #000000; opacity: 0.8;">
+  
+					 <div class = "card-header">
+						<h5><img src = "images/barber.png" style="width: 15px;"> Character creator</h5>   
+					</div>
+
+
+					<div class="card-body">
+  
+						<ul class="nav nav-pills nav justify-content-center" id="tab" role="tablist">
+	
+							<li class = "nav-item" role = "presentation">
+								<a class="nav-link active" id="apperance-tab" data-toggle="tab" href="#apperance" role="tab" aria-controls="apperance" aria-selected="true">
+									
+									<img src = "images/head.png">
+								</a>
+							</li> 
+
+							<li class = "nav-item" role = "presentation">
+								<a class="nav-link" id="head-tab" data-toggle="tab" href="#head" role="tab" aria-controls="head" aria-selected="true">
+									
+									<img src = "images/barber.png">
+								</a>
+							</li>   
+						</ul>
+						<hr>
+				 
+						<div class="tab-content" id="tabContent">
+     
+							<!-- APPERANCE-->
+							<div class="tab-pane fade show active" id="apperance" role="tabpanel" aria-labelledby="apperance-tab"> 
+
+								<div class="scroll"> 
+									   
+									<h6>Gender <i class="fa fa-venus-mars" aria-hidden="true"></i></h6>   
+									<div class = "round">
+
+										<img class="item" src = "images/arrow-left.png" data-action="left">
+
+										<h6 class = "text" id = "player-gender"></h6> 
+
+										<img class="item" src = "images/arrow-right.png" data-action="right">
+									</div> 
+									
+									<br>
+									<h6>Mother <i class="fa fa-female" aria-hidden="true"></i></h6>   
+									<div class = "round">
+
+										<img class="item" src = "images/arrow-left.png" data-action="change-mother-left">
+									
+										<h6 class = "text" id = "player-mother"></h6> 
+
+										<img class="item" src = "images/arrow-right.png" data-action="change-mother-right">
+
+									</div> 
+								
+									<br>
+									<h6>Father <i class="fa fa-male" aria-hidden="true"></i></h6>   
+									<div class = "round">
+
+										<img class="item" src = "images/arrow-left.png" data-action="change-father-left">
+									
+										<h6 class = "text" id = "player-father"></h6> 
+
+										<img class="item" src = "images/arrow-right.png" data-action="change-father-right">
+
+									</div>     
+								</div>  
+							</div>  
+
+
+						    <!-- HEAD -->
+							<div class="tab-pane fade" id="head" role="tabpanel" aria-labelledby="head-tab"> 
+
+								<div class="scroll"> 
+
+									<center><h5><span class="badge badge-pill badge-info" >EYES</span></h5></center>
+ 
+									<h6>Color eyes <i class="fa fa-eye" aria-hidden="true"></i></h6>     
+									<div class = "round"> 
+										  
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio5" name="customRadio" class="custom-control-input" data-action="eyes" value="0" checked >
+											<label class="custom-control-label" for="customRadio5"><img src = "images/splash-green.png" width="20"></label>
+										</div>
+										
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio6" name="customRadio" class="custom-control-input" data-action="eyes" value="2">
+											<label class="custom-control-label" for="customRadio6"><img src = "images/splash-blue.png" width="20"></label>
+										</div>
+ 
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio7" name="customRadio" class="custom-control-input" data-action="eyes" value="5">
+											<label class="custom-control-label" for="customRadio7"><img src = "images/splash-brown.png" width="20"></label>
+										</div> 
+
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio8" name="customRadio" class="custom-control-input" data-action="eyes" value="12">
+											<label class="custom-control-label" for="customRadio8"><img src = "images/splash-black.png" width="20"></label>
+										</div> 
+									</div>  
+									
+									<br>
+									<h6>Eyes size <i class="fa fa-eye" aria-hidden="true"></i></h6>   
+									<div class = "roundSlider">
+ 
+										<input style = "width: 80%;" value="0" step="0.1" min="-1" max="1" type="range" id = "eyesSize" oninput = "sliderModifi(5)">
+ 
+									</div>  
+									 
+									<br> 
+									<h6>Eyebrows height <i class="fa fa-eye" aria-hidden="true"></i></h6>   
+									<div class = "roundSlider"> 
+
+										<input style = "width: 80%;" value="0" step="0.1" min="-1" max="1" type="range" id = "eyebrowHeight" oninput = "sliderModifi(8)">
+ 
+									</div> 
+ 
+									<br>
+									<center><h5><span class="badge badge-pill badge-info">Nose</span></h5></center>
+									<h6>Nose width <i class="fa fa-eye" aria-hidden="true"></i></h6>   
+									<div class = "roundSlider">  
+									 
+										<input style = "width: 80%;" value="0" step="0.1" min="-1" max="1" type="range" id = "noseWidth" oninput = "sliderModifi(6)">
+   
+									</div>
+
+									<br> 
+									<h6>Nose height <i class="fa fa-eye" aria-hidden="true"></i></h6>   
+									<div class = "roundSlider">  
+								 
+										<input style = "width: 80%;" value="0" step="0.1" min="-1" max="1" type="range" id = "noseHeight" oninput = "sliderModifi(7)">
+ 
+									</div> 
+
+									<br> 
+									<center><h5><span class="badge badge-pill badge-info">Hair & Barber</span></h5></center>
+									<h6>Hair style<i class="fa fa-scissors" aria-hidden="true"></i></h6>   
+									<div class = "round">
+
+										<img class="item" src = "images/arrow-left.png" data-action="change-hair-left">
+
+										<a class = "text" id = "player-hair"></a> 
+
+										<img class="item" src = "images/arrow-right.png" data-action="change-hair-right">
+									</div>   
+
+                                    <br>
+									<h6>Color hair <i class="fa fa-paint-brush" aria-hidden="true"></i></h6>     
+									<div class = "round"> 
+										  
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio9" name="customRadio" class="custom-control-input" value="0" checked>
+											<label class="custom-control-label" for="customRadio9"><img src = "images/splash-black.png" width="20"></label>
+										</div>
+										
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio10" name="customRadio" class="custom-control-input" value="21">
+											<label class="custom-control-label" for="customRadio10"><img src = "images/splash-red.png" width="20"></label>
+										</div>
+ 
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio11" name="customRadio" class="custom-control-input" value="5">
+											<label class="custom-control-label" for="customRadio11"><img src = "images/splash-brown.png" width="20"></label>
+										</div> 
+
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio12" name="customRadio" class="custom-control-input" value="47">
+											<label class="custom-control-label" for="customRadio12"><img src = "images/splash-orange.png" width="20"></label>
+										</div> 
+
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio13" name="customRadio" class="custom-control-input" value="34">
+											<label class="custom-control-label" for="customRadio13"><img src = "images/splash-pink.png" width="20"></label>
+										</div> 
+
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio14" name="customRadio" class="custom-control-input" value="44">
+											<label class="custom-control-label" for="customRadio14"><img src = "images/splash-green.png" width="20"></label>
+										</div>  
+									</div>  
+
+									<br>
+									<h6>Beard<i class="fa fa-scissors" aria-hidden="true"></i></h6>   
+									<div class = "round">
+
+										<img class="item" src = "images/arrow-left.png" data-action="change-beard-left">
+
+										<a class = "text" id = "player-beard"></a> 
+
+										<img class="item" src = "images/arrow-right.png" data-action="change-beard-right">
+
+									</div>    
+								</div>      
+							</div>   
+						</div>  
+
+						<hr>
+						<button type="button" class="btn btn-outline-info btn-sm btn-block" onclick="startButton();">Create <i class="fa fa-check" aria-hidden="true"></i></button>  
+
+					</div>  
+				</div> 
+			</div>
+		</div>
+	</div>
+  
+ 
+	<!-- Bootstrap 4 Scrips CDN -->  
+	<script>  
+    	var checkboxes = document.querySelectorAll("input[type=radio][name=customRadio]");  
+		var playerGender = 0;
+		var count = 0;
+
+		const fatherSelect = ["Benjamin", "Daniel", "Joshua", "Noah", "Andrew", "Juan", "Alex", "Isaac", "Evan", "Ethan", "Vincent", "Angel", "Diego", "Adrian", "Gabriel", "Michael", "Santiago", "Kevin", "Louis", "Samuel", "Anthony", "Claude", "Niko", "John"]
+		const motherSelect = ["Hannah", "Aubrey", "Jasmine", "Gisele", "Amelia", "Isabella", "Zoe", "Ava", "Camila", "Violet", "Sophia", "Evelyn", "Nicole", "Ashley", "Gracie", "Brianna", "Natalie", "Olivia", "Elizabeth", "Charlotte", "Emma", "Misty"]
+		const hairM = ["None", "Buzzcut", "Faux Hawk", "Hipster", "Side Parting", "Shorter Cut", "Biker", "Ponytail", "Cornrows", "Slicked", "Short Brushed", "Spikey", "Caesar", "Chopped", "Dreads", "Long Hair", "Shaggy Curls", "Surfer Dude", "Short Side Part", "High Slicked Sides", "Long Slicked", "Hipster Youth", "Mullet", "Classic Cornrows", "Palm Cornrows", "Lightning Cornrows", "Whipped Cornrows", "Zig Zag Cornrows", "Snail Cornrows", "Hightop", "Loose Swept Back", "Undercut Swept Back", "Undercut Swept Side", "Spiked Mohawk", "Mod", "Layered Mod", "Flattop", "Rolled Quiff"]
+        const hairF = ["None", "Short", "Layered Bob", "Pigtails", "Ponytail", "Braided Mohawk", "Braids", "Bob", "Faux Hawk", "French Twist", "Long Bob", "Loose Tied", "Pixie", "Shaved Bangs", "Top Knot", "Wavy Bob", "Messy Bun", "Pin Up Girl", "Tight Bun", "Twisted Bob", "Flapper Bob", "Big Bangs", "Braided Top Knot", "Mullet", "Pinched Cornrows", "Leaf Cornrows", "Zig Zag Cornrows", "Pigtail Bangs", "Wave Braids", "Coil Braids", "Rolled Quiff", "Loose Swept Back", "Undercut Swept Back", "Undercut Swept Side", "Spiked Mohawk", "Bandana and Braid", "Layered Mod"]
+		const beard = ["None", "Light Stubble", "Balbo", "Circle Beard", "Goatee", "Chin", "Chin Fuzz", "Pencil Chin Strap", "Scruffy", "Musketeer", "Mustache", "Trimmed Beard", "Stubble", "Thin Circle Beard", "Horseshoe", "Pencil and 'Chops", "Chin Strap Beard", "Balbo and Sideburns", "Mutton Chops", "Scruffy Beard", "Curly", "Curly & Deep Stranger", "Handlebar", "Faustic", "Otto & Patch", "Otto & Full Stranger", "Light Franz", "The Hampstead", "The Ambrose", "Lincoln Curtain"] 
+		const genders = ["Male", "Female"]
+		const items = document.querySelectorAll('.item');
+ 
+		checkboxes.forEach(function(checkbox) {
+			checkbox.addEventListener('change', function() {
+				const {action} = checkbox.dataset;
+  
+				sendInfoCharacter(action, checkbox.id , checkbox.value); 
+			})
+		});
+
+        //Change eyes and hair colors
+		function sendInfoCharacter(action, id, value)
+		{   
+			mp.trigger((action === 'eyes') ? ("changeEyesColor") : ("changeHairColor"), value);   
+		}
+ 
+		window.addEventListener('DOMContentLoaded', () => {
+			  
+			//GENDER
+			const genderHolder = document.querySelector('#player-gender'); 
+			genderHolder.innerHTML = 'Male';
+	
+			//MOTHER AND FATHER
+			const motherHolder = document.querySelector('#player-mother'); 
+			motherHolder.innerHTML = 'Hannah';
+			  
+			const fatherHolder = document.querySelector('#player-father'); 
+			fatherHolder.innerHTML = 'Benjamin';  
+
+			//HAIR
+			const playerHair = document.querySelector('#player-hair'); 
+			playerHair.innerHTML = 'None';  
+
+			//BEARD
+			const playerBeard = document.querySelector('#player-beard'); 
+			playerBeard.innerHTML = 'None';  
+		}); 
+   
+		function sliderModifi(type)
+		{ 
+			var noseWidth = document.getElementById("noseWidth");
+			var noseHeight = document.getElementById("noseHeight");
+
+			//Eyes
+			var eyesSize = document.getElementById("eyesSize");
+			var eyebrowHeight = document.getElementById("eyebrowHeight");
+ 
+			switch(type)
+			{
+			    case 5:
+				{
+					mp.trigger("changeGender", type, eyesSize.value);  
+				    break;
+				}
+
+			    case 6:
+				{
+					mp.trigger("changeGender", type, noseWidth.value);  
+				    break;
+				}
+
+			    case 7:
+				{
+					mp.trigger("changeGender", type, noseHeight.value);  
+				    break;
+				} 
+				case 8:
+				{
+					mp.trigger("changeGender", type, eyebrowHeight.value);  
+				    break;
+				}
+			} 
+		}
+ 
+		 
+
+		items.forEach(item => {
+            item.addEventListener('click', (e) => {
+				const {action} = item.dataset;
+ 
+				//CHANGE GEMDER
+				if(action === 'left' || action === 'right') 
+				{  
+					playerGender = (action === 'left') ? (0) : (1);
+					updateGender(playerGender);     
+			    }
+		  
+				 
+				//CHANGE MOTHER 
+				if(action === 'change-mother-left' || action === 'change-mother-right') 
+				{  
+					if(count > 0 && action === 'change-mother-left') count --;
+					if(count < 21 && action === 'change-mother-right') count ++;
+ 
+					updateParrents(1, count);
+				}
+					 
+				
+				//CHANGE FATHER 
+				if(action === 'change-father-left' || action === 'change-father-right') 
+				{  
+					if(count > 0 && action === 'change-father-left') count --;
+					if(count < 23 && action === 'change-father-right') count ++;
+ 
+					updateParrents(2, count);
+				}
+
+
+				//CHANGE HAIR 
+				if(action === 'change-hair-left' || action === 'change-hair-right') 
+				{  
+					if(count > 0 && action === 'change-hair-left') count --;
+					if(count < ((playerGender == 0) ? (hairM.length - 1) : hairF.length - 1) && action === 'change-hair-right') count ++;
+ 
+					changeHair(count); 
+				} 
+
+				//CHANGE BEARD 
+				if(action === 'change-beard-left' || action === 'change-beard-right') 
+				{  
+					if(count > 0 && action === 'change-beard-left') count --;
+					if(count < beard.length - 1 && action === 'change-beard-right') count ++;
+ 
+					changeBeard(count); 
+				} 
+            });
+        });
+
+		//UPDATE GENDER
+		function updateGender(i)
+		{ 
+			const genderHolder = document.querySelector('#player-gender'); 
+			genderHolder.innerHTML = genders[i];  
+
+			mp.trigger("changeGender", 0, i); 
+		}
+
+		function updateParrents(type, count)
+		{
+			const motherHolder = document.querySelector('#player-mother'); 
+			const fatherHolder = document.querySelector('#player-father'); 
+
+			//MOTHER
+			if(type == 1)
+			{
+				motherHolder.innerHTML = motherSelect[count]; 
+				mp.trigger("changeGender", 1, count); 
+			}
+			 
+			//FATHER
+			if(type == 2)
+			{
+				fatherHolder.innerHTML = fatherSelect[count];
+				mp.trigger("changeGender", 2, count); 
+			}   	 
+		}
+ 
+		function changeHair(count)
+		{ 
+			const playerHair = document.querySelector('#player-hair'); 
+			playerHair.innerHTML = (playerGender == 0) ? (hairM[count]) : (hairF[count]); 	 
+
+			mp.trigger("changeHairEvent", count); 
+		} 
+
+		function changeBeard(count)
+		{ 
+			const playerBeard = document.querySelector('#player-beard'); 
+			playerBeard.innerHTML = beard[count]; 	 
+
+			mp.trigger("changeBeard", count); 
+		} 
+
+
+		function startButton()
+		{
+			mp.trigger("characterSave"); 
+		}
+
+
+	</script>
+ 
+	<script src = "character.js"></script>  
+	<script src = "https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
+	<script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> 
+	<!-- End Bootstrap 4 Scripts CDN-->
+</body>
+
+</html>
+
+
+
+<!--
+
+	----UPDATES----
+	1. Facuta partea cu change SEX
+	2. Facuta partea cu change mother - father
+	3. Facuta partea cu eyes color
+	4. Facuta partea cu eyes size
+    5, Facut partea cu eyes color
+	6. Facuta paryea cu Nose width - Nose height
+	7. Facuta partea cu par, culoare par
+	8. Facuta partea cu barba, culoare barba 
+
+ 
+
+-->
+

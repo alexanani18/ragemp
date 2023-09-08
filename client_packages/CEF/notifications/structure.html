@@ -1,0 +1,48 @@
+<!DOCTYPE html> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link rel="stylesheet" href="./structure_style.css">
+    <script src="notifications.js" defer></script>
+</head>
+<body>
+    <div class="str_container_notifications" id="str_notifications_parent">
+        
+    </div>
+ 
+    <script>
+
+    const Notifications = document.querySelectorAll('.str_notification');
+    
+    Notifications.forEach(notification => addListenerToNotification(notification));
+
+    function createNotification(message, parent = '.str_container_notifications') {
+        const parentContainer = document.querySelector(parent);
+        const newNotification = document.createElement("div");
+        newNotification.classList.add('str_notification');
+        newNotification.innerHTML = `
+                <p class="str_notification_content">${message}</p>
+                <div class = "str_notification_progress" id = "str_notification_progress"></div>
+        `;
+        parentContainer.appendChild(newNotification);
+        addListenerToNotification(newNotification);
+    }
+
+
+    function addListenerToNotification(notification_parent) {
+        const notification_progress = notification_parent.querySelector('.str_notification_progress');
+
+        if(!notification_progress)
+            return;
+
+        notification_progress.addEventListener('animationend', () => {
+            notification_parent.classList.add('str_notification_destroy');
+            notification_progress.remove();
+            setTimeout(() => notification_parent.remove(), 700);
+        });
+    }  
+    </script>
+
+</body>
+</html>

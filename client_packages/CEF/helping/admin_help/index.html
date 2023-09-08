@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<!-- Custom Style -->
+
+	<style type="text/css">
+		html body {
+		    background-color: rgba(0, 0, 0, 0.0);
+			user-select: none; 
+			 
+		}
+		body .container {
+		    margin-top: 20%; 
+		} 
+
+		::-webkit-scrollbar {
+			width: 7px; 
+            display: block;
+		}
+
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+			background: #1a75ff;
+			border-radius: 200px;
+		}
+
+		/* Handle on hover */
+		::-webkit-scrollbar-thumb:hover {
+			background: rgb(134, 134, 134);
+		} 
+
+		.scroll {
+			overflow-y: auto;
+			 
+			height: 350px; 
+		}
+	</style>
+
+	<!-- Fontawesome CDN -->
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
+	<!-- Bootstrap 4 CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
+
+</head>
+
+<body>
+     
+	<div class = "container">
+		<div class = "row mx-auto align-item-center justify-content-center">
+			<div class = "col-md-9">
+
+				<div class = "card text-light" style = "background-color: #000000; opacity: 0.8;">
+ 
+					<h6 class = "card-header text-center">
+						<i class = "fa fa-bars"></i> Admin help   
+
+						<button class="btn btn-dark btn-sm float-right" onclick = "destroy_browser();"><i class="fa fa-times"></i></button> 
+					</h6>
+
+					<h6 class="card-body scroll"> 
+ 
+						<!------------------------------------------------------------------- [ADMIN LEVEL 1] ----------------------------------------------------------------- --> 
+						<div class="text-center">
+							<div style=" margin-left: 35%; margin-right: 35%; padding: 0.5rem 1rem; background-color: #1a75ff; border-radius: 30px;">
+							
+								Admin level 1 <i class="fa fa-trophy"></i>
+							
+							</div> 
+						</div>
+					  
+						<br>
+ 
+						<p>1. [/respawn] - respawn vehicle.</p> 
+						<p>2. [/goto] - teleport to player.</p>
+						<p>3. [/gethere] - teleport player to you.</p>
+						<p>4. [/freeze] - stuck player.</p>
+						<p>5. [/unfreeze] -  unstuck player.</p>
+						<p>6. [/slap] - slap player.</p>
+						<p>7. [/givegun] - give gun to player.</p>
+						<p>8. [/disarm] - disarm player.</p>
+						<p>9. [/mark] - save your last position.</p>
+						<p>10. [/gotomark] - teleport to last location.</p>
+						<p>11. [/repair] - repair vehicle.</p>
+						<p>12. [/spawncar] - spawn admin vehicle.</p>
+						<p>13. [/vre] - destroy vehicule.</p> 
+						<p>14. [/pm] - send private message to player.</p>
+						<p>15. [/a] - admin chat.</p> 
+						<p>16. [/setdimension] - set dimension.</p> 
+
+						<br>
+
+						<!------------------------------------------------------------------- [ADMIN LEVEL 2] ----------------------------------------------------------------- --> 
+                        <div class="text-center">
+							<div style=" margin-left: 35%; margin-right: 35%; padding: 0.5rem 1rem; background-color: #1a75ff; border-radius: 30px;">
+							
+								Admin level 2 <i class="fa fa-trophy"></i>
+							
+							</div> 
+						</div>
+						<br>
+
+						<p>1. [/kick] - kick player from server.</p> 
+						<p>2. [/va] - respawn vehicles from your location.</p>
+						<p>3. [/nearcars] - show vehicles from your location.</p>
+						<p>4. [/fv] - repair your vehicle.</p>
+						<p>5. [/flip] - flip your vehicle.</p>
+						<p>6. [/gotocar] - teleport to vehicle.</p>
+						<p>7. [/getcar] -  teleport vehicle to you.</p> 
+						<p>8. [/healme] - set your health to 100%.</p>
+						<p>9. [/heal] - change player health.</p>
+					   
+						<br>
+
+						<!------------------------------------------------------------------- [ADMIN LEVEL 3] ----------------------------------------------------------------- --> 
+                        <div class="text-center">
+							<div style=" margin-left: 35%; margin-right: 35%; padding: 0.5rem 1rem; background-color: #1a75ff; border-radius: 30px;">
+							
+								Admin level 3 <i class="fa fa-trophy"></i>
+							
+							</div> 
+						</div>
+						<br>
+
+						<p>1. [/clearchat] - clear chat for all players.</p> 
+						<p>2. [/anno] - send announce to all players</p>
+				  
+						<br>
+
+						<!------------------------------------------------------------------- [ADMIN LEVEL 4] ----------------------------------------------------------------- --> 
+                        <div class="text-center">
+							<div style=" margin-left: 35%; margin-right: 35%; padding: 0.5rem 1rem; background-color: #1a75ff; border-radius: 30px;">
+							
+								Admin level 4 <i class="fa fa-trophy"></i>
+							
+							</div> 
+						</div>
+						<br>
+
+						<p>1. [/mute] - mute player.</p> 
+						<p>2. [/unmute] - unmute player.</p>
+						<p>2. [/gotoxyz] - teleport to coordonates.</p>
+						  
+						<br>
+					</h6>  
+				</div>  
+			</div>
+		</div>
+	</div>
+ 
+    <!-- Bootstrap 4 Scrips CDN --> 
+	<script src = "index.js"></script> 
+	<script src = "https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
+	<!-- End Bootstrap 4 Scripts CDN-->
+</body>
+
+</html>

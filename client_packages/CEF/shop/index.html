@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+
+<head> 
+	<!-- Custom Style --> 
+	<style type= "text/css">
+		html body {
+		    background-color: rgba(0, 0, 0, 0.0);
+		}
+		body .container {
+			margin-top: 23%;
+			opacity: 0.8;
+		} 
+
+		.table-scrollbar {
+			position: relative;
+			height: 350px;
+			overflow: auto;
+		}
+		.table-wrapper-scroll-y {
+			display: block;
+		}
+
+		::-webkit-scrollbar {
+		    width: 8px;
+		}
+
+		::-webkit-scrollbar-track {
+		    background: #787878;
+		}
+
+		::-webkit-scrollbar-thumb {
+		    background: #555;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+		    background: #2b2b2b;
+		}
+ 
+		::-webkit-scrollbar {
+			display: none; 
+		}
+ 
+
+	</style>
+
+	<!-- Fontawesome CDN -->
+	<link href = "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel = "stylesheet" integrity = "sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin = "anonymous">
+	
+	<!-- Bootstrap 4 CDN -->
+	<link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity = "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin = "anonymous"> 
+</head>
+
+<body> 
+	<div class = "modal" id = "buy_item" tabindex = "-1" role = "dialog">
+		<div class = "modal-dialog " role = "document">
+	        <div class = "modal-content text-light" style = "background-color: #000000; opacity: 0.8;">
+			    <div class = "modal-header">
+				    <h6 class = "modal-title">Confirm Order</h6>
+				   
+					<button class="btn btn-dark btn-sm float-right" style="background-color: #212429;" data-dismiss = "modal"><i class="fa fa-times-circle"></i></button>
+			 
+				</div>
+				
+	            <div class = "modal-body">
+
+					<a id = "itemConfirm-placeholder"></a>
+				     
+	            </div> 
+			</div>
+	    </div>
+	</div>
+
+	<div class = "container">
+		<div class = "row mx-auto align-item-center justify-content-center">
+			<div class = "col-md-12">
+
+				<div class = "card text-light" style = "background-color: #000000;">
+   
+					<h6 class = "card-header">
+						
+						Premium Shop 
+						
+						<button class = "btn btn-dark btn-sm float-right" style = "background-color: #212429;" onclick = "clickItem(0, 0, 0);"><i class="fa fa-times-circle"></i></button>
+					</h6>
+ 
+					<div class="card-body">
+
+						<div class="scroll" style="height: 460px; overflow-y: scroll;"> 
+  
+							<div class = "row" id="items-placeholder"></div>  
+						</div> 
+					</div> 
+				</div> 
+			</div>
+		</div> 
+	</div>
+
+	<script>
+
+		var textShop = '';
+		var amountNumber = 1;
+		  
+        const shopItems = [               //ITEM ID (for inventory)
+			//["Parrot", "parrot.svg",  200, 1],
+			["Smart Watch", "smart.png",  250, 12] 
+		] 
+ 
+		window.addEventListener('DOMContentLoaded', () => {
+				 
+			addItems();
+		});
+ 
+		function clickItem(button, itemID, payType)
+		{   
+			
+			mp.trigger("receiver_shop_items", button, payType, shopItems[itemID][3], shopItems[itemID][0], amountNumber, shopItems[itemID][2] * amountNumber);
+ 
+			switch(button)
+			{
+				//CLOSE BROWSER
+				case 0:
+				{ 
+					break;
+				}
+
+                //CLICK ITEM
+				case 1:
+				{
+					amountNumber = 1;   
+
+					const infoShop = document.querySelector('#itemConfirm-placeholder'); 
+					infoShop.innerHTML = `
+					
+						<div class = "col-lg-12">
+			
+							<div class="card" style="background-color: #212429;">
+
+								<div class="card-header text-center"><h6>${shopItems[itemID][0]}</h6></div>
+
+								<div class="card-body text-center"> 
+									<img src="./images/${shopItems[itemID][1]}" style = "width:70px; position: float-center;">   
+								</div>  
+
+								<a class = "text-center"> 
+
+									<h6> 
+										<i class="fa fa-database" aria-hidden="true"></i> Price: <span style = 'color:#ff6600;' id = "item-price">${shopItems[itemID][2]}</span> premium points
+										<br><br> 
+		
+										<h6>
+											<button type="button" onclick = "modifi(${itemID}, 0);" style = "margin-right: 35px;" class="btn btn-outline-info btn-sm" value = "1"> <i class="fa fa-chevron-left" aria-hidden="true"></i> </button>
+		
+											<span style = "text-align:center; ">
+												Amount: <span style = 'color:#ff6600;' id = "item-amount">  </span> 
+											</span>
+		
+											<button type="button" onclick = "modifi(${itemID}, 1);" style = "margin-left: 35px;" class="btn btn-outline-info btn-sm" value = "1"> <i class="fa fa-chevron-right" aria-hidden="true"></i> </button>
+										</h6>
+		
+										<br> 
+										<button style = "width: 130px;" type = "button" class="btn btn-info btn-sm" onclick = "clickItem(2, ${itemID}, 1);">Card <i class = "fa fa-credit-card"></i></button>
+							        	<button style = "width: 130px;" type = "button" class="btn btn-success btn-sm" onclick = "clickItem(2, ${itemID}, 2);">Cash <i class = "fa fa-money"></i></button> 
+									
+									
+									</h6> 
+								</a><br>  
+							</div>	 
+						</div>  
+					`;
+		
+					$('#buy_item').modal() 
+
+					const itemAmount = document.querySelector('#item-amount'); 
+					itemAmount.innerHTML = 1;  
+
+					const itemPrice = document.querySelector('#item-price'); 
+					itemPrice.innerHTML = shopItems[itemID][2]; 
+					break;
+				}
+
+                //BUY ITEM
+				case 2:
+				{ 
+					$('#buy_item').modal('hide');  
+					break;
+				}
+			} 
+		}
+
+		function modifi(x, type)
+		{ 
+			//Veriffication
+			if(type == 0 && amountNumber == 1) 
+			    return;
+
+			//Edit -- or ++
+			amountNumber = (type == 0) ? (amountNumber - 1) : (amountNumber + 1)
+ 
+			//Modifi amount
+			const itemAmount = document.querySelector('#item-amount'); 
+			itemAmount.innerHTML = amountNumber; 
+ 
+			//Modifi total price
+			const itemPrice = document.querySelector('#item-price'); 
+			itemPrice.innerHTML = shopItems[x][2] * amountNumber;  
+		}
+				  
+		function addItems()
+		{
+			for(let x = 0; x < shopItems.length; x++)
+			{
+				textShop += `
+
+					<div class = "col-lg-3" >
+	
+						<div class="card" style="background-color: #212429;">
+
+							<div class="card-header text-center"><h6>${shopItems[x][0]}</h6></div>
+
+							<div class="card-body text-center"> 
+								<img src="./images/${shopItems[x][1]}" style = "width:70px; position: float-center;">  
+							</div>   
+						</div>	 
+
+						<br>
+						<button type="button" class="btn btn-outline-success btn-sm btn-block" onclick = "clickItem(1, ${x});">Order <i class="fa fa-check" aria-hidden="true"></i></button> 
+						
+						<br>
+					</div> 
+				`;
+			}
+ 
+			const totalItemsAdded = document.querySelector('#items-placeholder'); 
+			totalItemsAdded.innerHTML = textShop;
+		} 
+	</script>
+ 
+	<!-- Bootstrap 4 Scrips CDN -->
+	<script src = "shop.js"></script> 
+	<script src = "https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity = "sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin = "anonymous"></script> 
+	<script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity = "sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin = "anonymous"></script>
+	<!-- Bootstrap 4 Scrips CDN -->  
+
+</body> 
+</html>

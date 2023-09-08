@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	 
+	<style type="text/css">
+		html body {
+		    background-color: rgba(0, 0, 0, 0.0);
+			user-select: none;
+		}
+
+		body .container {
+		    margin-top: 20%;
+			opacity: 0.8;
+		}
+ 
+		.table-scrollbar {
+			position: relative;
+			height: 350px;
+			overflow: auto;
+		}
+		
+		.table-wrapper-scroll-y {
+			display: block;
+		}
+
+		::-webkit-scrollbar {
+		    width: 8px;
+		}
+
+		::-webkit-scrollbar-track {
+		    background: #787878;
+		}
+
+		::-webkit-scrollbar-thumb {
+		    background: #555;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+		    background: #2b2b2b;
+		}  
+ 
+		#welcome-message {
+			width: 100%;
+			padding: 1rem 1.5rem;
+			margin: 1rem 0;
+			background-color: #171a1c;
+			border-radius: 20px;
+
+			text-align: center;
+		}
+		#welcome-message > h5 {
+			font-size: 1.5rem;
+		}
+		#welcome-message > p {
+			font-size: 1.25rem;
+		} 
+	</style>
+
+	<!-- Fontawesome CDN -->
+	<link href = "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel = "stylesheet" integrity = "sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin = "anonymous">
+	
+	<!-- Bootstrap 4 CDN -->
+	<link href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel = "stylesheet" integrity = "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin = "anonymous"> 
+</head>
+
+<body>  
+	
+	<!--Modal teleport-->
+	<div class = "modal" id = "teleport_to" tabindex = "-1" role = "dialog">
+		<div class = "modal-dialog" role = "document">
+	        <div class = "modal-content text-light" style = "background-color: #212429;">
+	            <div class = "modal-header">
+	                <h5 class = "modal-title">Teleport to:</h5>  
+
+			    </div>
+		  
+				<div class = "modal-body">     
+					<h6 class = "text-muted">
+						<i>
+
+							Select the player you want to teleport to. <i class = "fa fa-compass" aria-hidden = "true"></i>
+						</i>
+					</h6> 
+ 
+				</div> 
+
+				<div class = "modal-footer">
+
+					<a class = "text" id = "teleport-placeholder"> </a> 
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Modal close report-->
+	<div class="modal fade" id="close_report" tabindex = "-1" role = "dialog">
+		<div class="modal-dialog" role="document">
+			<div class = "modal-content text-light" style = "background-color: #212429;">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Close report</h5> 
+				</div>
+			
+				<div class="modal-body">
+ 
+					<form>   
+						<div class="form-group"> 
+							<label for = "reportReason"><i class = "fa fa-comment-o" aria-hidden = "true"></i> Report reason</label>
+							<textarea class = "form-control" id = "reportCloseReason" rows = "3" placeholder="Please enter reason..."></textarea>
+						</div>
+					</form>  
+				</div>
+ 
+				<div class="modal-footer" id = "reportClose-placeholder"></div>
+			</div>
+		</div>
+	</div>
+
+	<!--Modal view more-->
+	<div class="modal fade" id="view_more" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		    <div class = "modal-content text-light" style = "background-color: #212429;">
+			    <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLongTitle">View more</h5> 
+			    </div>
+			
+				<div class="modal-body" id="more-placeholder">
+ 
+				</div>
+			
+				<div class="modal-footer">
+					<button type="button" class = "btn btn-outline-danger btn-block btn-sm" class = "close" data-dismiss = "modal" aria-label = "Close">Close <i class = "fa fa-close" aria-hidden = "true"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class = "container">
+		<div class = "row mx-auto align-item-center justify-content-center">
+			<div class = "col-md-13">
+
+				<div class = "card text-light" style = "background-color: #000000;">
+ 
+					<div class = "card-header">
+						<i class = "fa fa-ticket"></i> Reports
+						<div class = "float-right">
+
+							<button class="btn btn-dark" style = "background-color: #212429;" onclick = "clickReport(0);"><i class = "fa fa-times-circle"></i></button>  
+
+						</div>
+					</div> 
+					<div class = "card-body"> 
+						<div id = "welcome-message">
+ 
+							<a class = "text" id = "infoTickets-placeholder"></a>
+						</div>
+ 
+						<!-- View tickets and send --> 
+						<div class = "table-wrapper-scroll-y table-scrollbar">
+							<table class = "table table-hover table-dark">
+								<thead style = "background-color: #212429;text-align:center;">
+									<tr> 
+										<th>Reporter <i class = "fa fa-users" aria-hidden = "true"></i></th>   
+										<th>Reported <i class = "fa fa-users" aria-hidden = "true"></i></th>  
+										<th>Date <i class = "fa fa-calendar" aria-hidden = "true"></i></th> 
+										<th>Details <i class = "fa fa-comment-o" aria-hidden = "true">>
+										<th>Priority <i class = "fa fa-exclamation-triangle"></i></th> 
+										<th>Status <i class = "fa fa-spinner"></i></th>     
+										<th>Options <i class = "fa fa-cog"></i></th>  
+									</tr>
+								</thead>
+
+								<tbody id = "playerTickets-placeholder" style="text-align:center;"></tbody>    
+							</table> 
+						</div>      
+					</div> 
+				</div> 
+			</div>
+		</div>
+	</div> 
+ 
+	<!-- Bootstrap 4 Scrips CDN -->  
+	<script src = "reports.js"></script> 
+	<script src = "https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity = "sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin = "anonymous"></script>
+	<script src = "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity = "sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin = "anonymous"></script>
+	<script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity = "sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin = "anonymous"></script> 
+    <!-- End Bootstrap 4 Scripts CDN-->
+	
+	<script>
+		function showMoreModalText(id, text)
+		{
+			if(id == 0)
+			{
+
+				const moreDetailsText = document.querySelector('#more-placeholder'); 
+				moreDetailsText.innerHTML = text;
+
+				$('#view_more').modal()
+
+			}
+			else if(id == 1)
+			{ 
+				const teleportTo = document.querySelector('#teleport-placeholder'); 
+				teleportTo.innerHTML = text;
+
+				$('#teleport_to').modal() 
+			} 
+			else 
+			{   
+				const closeReport = document.querySelector('#reportClose-placeholder'); 
+				closeReport.innerHTML = text;
+ 
+				$('#close_report').modal() 
+			} 
+		} 
+
+		const availableInputs = ['input', 'textarea'];
+		
+		availableInputs.forEach(inputName => {
+		    const inputs = document.querySelectorAll(inputName);
+		    inputs.forEach(input => {
+				
+				input.addEventListener("focus", () => {
+					mp.trigger('ToggleChat', 1, true, false);
+				});
+				
+				input.addEventListener("focusout", (e) => {
+					mp.trigger('ToggleChat', 1, false, false);
+				});
+		    });
+		}); 
+
+	</script> 
+</body> 
+</html>

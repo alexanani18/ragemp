@@ -1,0 +1,144 @@
+<!DOCTYPE html> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+     
+    <script src="gunShop.js"></script>  
+</head>
+<body>
+    <div class="modal">
+        <div class="modal-header">
+            <h1>Gun Shop</h1> 
+            <i class="fas fa-times-circle fa-fw" id="modal-close" onclick = "playerClickGunShop(0);" style="margin-left: auto;"></i>
+        </div>
+        <hr>
+        <div class="modal-body">
+            <div class="items-list">
+                <div class="item" data-price="1000" data-precision="10" data-damage="5" data-range="15" data-bullets="25">
+                    <img src="./imgs/pistol.webp" alt="Pistol">
+                    <div class="info">
+                        <h4>Pistol</h4>
+                    </div>
+                </div>
+                <div class="item" data-price="3000" data-precision="45" data-damage="10" data-range="32" data-bullets="600">
+                    <img src="./imgs/smg.webp" alt="Micro SMG">
+                    <div class="info">
+                        <h4>Micro SMG</h4>
+                    </div>
+                </div>
+                <div class="item" data-price="5000" data-precision="32" data-damage="15" data-range="76" data-bullets="100">
+                    <img src="./imgs/ak47.webp" alt="Assault Rifle">
+                    <div class="info">
+                        <h4>Assault Rifle</h4>
+                    </div>
+                </div>
+                <div class="item" data-price="10000" data-precision="64" data-damage="100" data-range="200" data-bullets="50">
+                    <img src="./imgs/sniper.webp" alt="Heavy Sniper">
+                    <div class="info">
+                        <h4>Heavy Sniper</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="current-item">
+                <div id="icon-parent">
+                    <img src="./imgs/pistol.webp" alt="Pistol">
+                    <h2>Pistol</h2>
+                    <p><i class="fas fa-dollar-sign"></i> Price: <span class="price">1000</span></p>
+                    <p class="bullet-count"><img src="./imgs/bullet.svg" alt="Bullet">Bullets:&nbsp;<span id="bullet-count"></span></p>
+                    <div class="progress-parent">
+                        <div class="progress-holder">
+                            <p><i class="far fa-dot-circle fa-fw"></i> Precision</p>
+                            <div class="progress">
+                                <span class="bar" id="precision" style="width: 100%"></span>    
+                            </div>
+                        </div>
+                        <div class="progress-holder">
+                            <p><i class="fas fa-first-aid fa-fw"></i> Damage</p>
+                            <div class="progress">
+                                <span class="bar" id="damage" style="width: 100%"></span>    
+                            </div>
+                        </div>
+                        <div class="progress-holder">
+                            <p><i class="fas fa-ruler-horizontal fa-fw"></i> Range</p>
+                            <div class="progress">
+                                <span class="bar" id="range" style="width: 100%"></span>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn" id="buy-btn"><i class="fas fa-money-bill-wave fa-fw"></i> Cash</button>
+                        <button class="btn btn-card" id="buy-btn"><i class="fas fa-credit-card fa-fw"></i> Card</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script> 
+        const items = document.querySelectorAll('.item');
+        const itemPlaceholder = document.querySelector('.current-item');
+        const iconPlace = document.querySelector('#icon-parent');
+        const buyButtons = document.querySelectorAll('#buy-btn');
+
+        const modalClose = document.querySelector('#modal-close');
+        const modal = document.querySelector('.modal');
+
+        let currentItem = {name: null, price: 0};
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const item = items[0];
+            const {price, precision, range, damage, bullets} = item.dataset;
+            const productName = item.querySelector('.info > h4').innerHTML;
+            const icon = item.querySelector('img').cloneNode(true);
+            updatePlaceHolder({name: productName, price: Number(price), precision, range, damage, bullets}, icon);
+        });
+
+        modalClose.addEventListener('click', (e) => {
+            modal.classList.add('hide');
+        });
+
+        items.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const {price, precision, range, damage, bullets} = item.dataset;
+                const productName = item.querySelector('.info > h4').innerHTML;
+                const icon = item.querySelector('img').cloneNode(true);
+                updatePlaceHolder({name: productName, price: Number(price), precision, range, damage, bullets}, icon);
+            });
+        });
+
+        buyButtons.forEach((btn, idx) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                OnPlayerBuysItem(idx);
+            });
+        });
+
+
+        function updatePlaceHolder(item = {}, icon) {
+            if(!item.name || !item.price || !item.precision || !item.range || !item.damage)
+                return;
+            itemPlaceholder.querySelector('h2').innerHTML = item.name;
+            itemPlaceholder.querySelector('.price').innerHTML = '$' + item.price;
+            itemPlaceholder.querySelector('#bullet-count').innerHTML = item.bullets;
+            itemPlaceholder.querySelector('#precision').style.width = item.precision + '%';
+            itemPlaceholder.querySelector('#damage').style.width = item.range + '%';
+            itemPlaceholder.querySelector('#range').style.width = item.damage + '%';
+
+            itemPlaceholder.querySelector('img').remove();
+            iconPlace.insertBefore(icon, iconPlace.querySelector('h2'));
+
+            currentItem = Object.assign({}, currentItem, item);
+        }
+
+        function OnPlayerBuysItem(type) {
+            if(currentItem.name === null || currentItem.price === null)
+                return;
+
+            playerClickGunShop(1, currentItem.name, currentItem.price, currentItem.bullets, type); 
+        } 
+    </script> 
+</body>
+</html>

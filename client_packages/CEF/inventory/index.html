@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+
+<html>
+ 
+<head>
+	
+	<!-- Fontawesome CDN -->
+	<link href = "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel = "stylesheet" integrity = "sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin = "anonymous">
+	 
+	<link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity = "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin = "anonymous"> 
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="./css/style.css"> 
+</head>
+
+ 
+<body> 
+
+    <div class = "modal" id = "info_item" tabindex = "-1" role = "dialog">
+		<div class = "modal-dialog " role = "document">
+	        <div class = "modal-content text-light" style = "background-color: #000000; opacity: 0.8;">
+			    <div class = "modal-header" id = "modal-info"></div>
+				
+	            <div class = "modal-body">
+
+                    <div class = "col-lg-12">
+			
+                        <div class="card" style="background-color: #000000; opacity: 0.8;">
+
+                            <div class="card-header text-center" id = "header-info"></div>
+
+                            <div class="card-body text-center"> 
+                                  
+                                <h6 class = "text-center" id = "body-info"></h6> 
+                            </div>	 
+                        </div>	 
+                    </div>   
+	            </div> 
+			</div>
+	    </div>
+	</div>
+
+    <div class="container" style = "opacity: 0.8;">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-4" >    
+                <div class="card text-white" style="background-color: #000000;">
+                    <div class="card-header">
+                        <h5 class="card-title"><i class="fa fa-user"></i> Character</h5>
+                    </div>
+                    <div class="card-body text-center character-card">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="box" style="height: 60px;" id = "tshirt"></div>
+                                <br>
+
+                                <div class="box" style="height: 60px;" id = "jacket"></div>
+                                <br>
+
+                                <div class="box" style="height: 60px;" id = "jeans"></div>
+                            </div>
+
+                            <div class="col-lg-6">
+                               
+                                <img width = "80%" src="./img/character.png" >
+                            
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="box" style="height: 60px;" id = "hat"></div>
+                                <br>
+
+                                <div class="box" style="height: 60px;" id = "glasses"></div>
+                                <br>
+
+                                <div class="box" style="height: 60px;" id = "shoes"></div>
+                            </div>
+                        </div>
+                         
+                        <hr>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3">
+                                <div class="box" style="height: 60px;" id = "bracelet"></div>                            
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="box" style="height: 60px;" id = "smartwatch"></div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="box" style="height: 60px;" id = "mask"></div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="box" style="height: 60px;" id = "nuj"></div>
+                            </div>
+                        </div>  
+                        
+                        <br>  
+                        <h6 class="text-muted"><i>Licenses</i></h6>
+                         
+                        
+                        <div class="row justify-content-center">
+        
+                            <div class="col-lg-10 ">
+        
+                                <div class="progress_bar">
+                                    <div class="pro-bar" data-percent="99%">
+                                        <div class="progressbar-title" style="background: #3336f8;">
+                                            <span><i class="fa fa-car"></i></span>
+                                        </div>
+                                        <div class="progress-bar-inner" id = "driving-progress" style="background: rgb(69, 72, 255); width: 0%;"></div>
+                                        <div class="progress_number" id = "driving-license">12h</div>
+                                    </div>
+                                </div>
+        
+                                <div class="progress_bar">
+                                    <div class="pro-bar" data-percent="23%">
+                                        <div class="progressbar-title" style="background: #12ac1e;">
+                                            <span><i class="fa fa-plane"></i> </span>
+                                        </div>
+                                        <div class="progress-bar-inner" id = "flying-progress" style="background: rgb(29, 194, 51); width: 0%;"></div>
+                                        <div class="progress_number" id = "flying-license">5h</div>
+                                    </div>
+                                </div>
+        
+                                <div class="progress_bar">
+                                    <div class="pro-bar" data-percent="75%">
+                                        <div class="progressbar-title" style="background: #f72525;">
+                                            <span><i class="fa fa-bomb"></i></span>
+                                        </div>
+                                        <div class="progress-bar-inner" id = "weapon-progress" style="background: rgb(255, 66, 66); width: 0%;"></div>
+                                        <div class="progress_number" id = "weapon-license">8h</div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+
+            <div class="col-lg-8 ">
+
+                <div class="card text-white" style="background-color: #000000;">
+                    <div class="card-header">
+                        
+                        <h5 class="card-title"><i class="fa fa-suitcase"></i> Inventory <button class="btn btn-dark btn-sm float-right" onclick = "clickedItem(0);"><i class="fa fa-times"></i></button></h5>
+                        
+                    </div>
+                    <div class="card-body character-card scroll">
+
+                        <nav class="nav nav-pills flex-column flex-sm-row">
+
+                            <a class="nav-link flex-sm-fill text-sm-center nav-link active" id="main-tab" data-toggle="pill" href="#main" role="tab" aria-controls="main" aria-selected="true">Main</a>
+                            <a class="nav-link flex-sm-fill text-sm-center nav-link" id="clothes-tab" data-toggle="pill" href="#clothes" role="tab" aria-controls="main" aria-selected="false">Clothes</a> 
+
+                        </nav>
+ 
+                        <div class="tab-content" id="pills-tabContent">
+
+                            <!-- MAIN ITEMS -->
+                            <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab">
+                                
+                                <div class="card-body scroll">
+
+                                    <div class="row d-flex" id="mainItems-placeholder">
+
+    
+                                    </div>   
+                                </div>   
+                            </div>  
+ 
+                            <!-- CLOTHES ITEMS -->
+                            <div class="tab-pane fade" id="clothes" role="tabpanel" aria-labelledby="clothes-tab">
+                                        
+                                <div class="card-body scroll">
+							
+                                    <div class = "row" id = "clothesItems-placeholder">
+ 
+                                    </div>   
+                                </div>   
+                            </div>   
+                        </div>    
+                    </div>   
+                </div>   
+            </div> 
+        </div>
+    </div>  
+   
+    <script src = "inventory.js"></script>
+	<script src = "https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity = "sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin = "anonymous"></script>
+	<script src = "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity = "sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin = "anonymous"></script>
+	<script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity = "sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin = "anonymous"></script>
+	<script>
+
+        $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        })
+	</script>
+ 
+    <script>  
+
+ 
+
+        //Scade badge
+        function updateBrowsers(x, amount, button)
+        {
+            //UPDATE BADGE 
+            document.querySelector(`#badgeid${x}`).innerHTML = amount;  
+
+            if(button == 1)
+            {
+                var status = document.getElementById(`clicked-item${x}`); 
+                status.style.display = (status.style.display == "none") ? ("block") : ("none");
+            } 
+        }
+ 
+        function clickedItem(button, x)
+        {   
+            $('#info_item').modal('hide');  
+
+            mp.trigger("clickButtonInv", button, x);   
+        }
+    
+        function infoItem(x, id, amount, headerText, itemIndex)
+        {  
+            $('#info_item').modal() 
+
+            //MODAL INFO 
+            document.querySelector(`#modal-info`).innerHTML = `
+
+                <h5 class = "modal-title"><img src="./img/items/${itemIndex}.png" style = "width: 22px;"> Item info</h5>
+                        
+                <div class="float-right">
+                    <button class="btn btn-dark btn-sm" style="background-color: #212429;" data-dismiss = "modal"><i class="fa fa-times-circle"></i></button>
+                </div>      
+            `; 
+
+            //HEADER INFO 
+            document.querySelector(`#header-info`).innerHTML = headerText
+ 
+            //BODY INFO 
+            document.querySelector(`#body-info`).innerHTML = `
+                <i class="fa fa-database" aria-hidden="true"></i> Item amount: <span style = 'color:#0099ff;' id = "item-price"> ${amount} </span> 
+ 
+                <br><br>
+
+                <button onclick = "clickedItem(${4}, ${x});" style = "width: 130px;" type="button" class="btn btn-danger btn-sm">Drop item <i class="fa fa-trash"></i></button> 
+            `;
+        }
+ 
+        function addItems(drivingHours, flyingHours, weaponHours, mainText, clothingText, weaponsText)
+        {  
+            document.querySelector(`#mainItems-placeholder`).innerHTML = mainText;
+ 
+            document.querySelector(`#clothesItems-placeholder`).innerHTML = clothingText;
+  
+            updatePlayerLicense(drivingHours, flyingHours, weaponHours);
+        }
+ 
+        function updatePlayerLicense(drivingHours, flyingHours, weaponHours)
+        {      
+            //Driving
+            const drivingLicense = document.querySelector('#driving-license'); 
+            const drivingProgress = document.getElementById("driving-progress");
+            
+            drivingProgress.style.width = ((drivingHours <= 22 && drivingHours > 0) ? (23) : (drivingHours)) + "%"; 
+            drivingLicense.innerHTML = drivingHours + 'h';
+            
+            //Flying
+            const flyLicense = document.querySelector('#flying-license'); 
+            const flyingProgress = document.getElementById("flying-progress");
+
+            flyingProgress.style.width = ((flyingHours <= 22 && flyingHours > 0) ? (23) : (flyingHours)) + "%"; 
+            flyLicense.innerHTML = flyingHours + 'h';
+
+            //Weapon
+            const weaponLicense = document.querySelector('#weapon-license'); 
+            const weaponProgress = document.getElementById("weapon-progress");
+
+            weaponProgress.style.width = ((weaponHours <= 22 && weaponHours > 0) ? (23) : (weaponHours)) + "%"; 
+            weaponLicense.innerHTML = weaponHours + 'h';   
+        }   
+	</script>
+
+</body> 
+</html>

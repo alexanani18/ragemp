@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.modal {
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    background: #2E3338;
+    color: white;
+
+    padding: 1rem 1.5rem;
+
+    overflow: hidden;
+    z-index: 10;
+    display: block;
+}
+.modal.hide {
+    display: none;
+}
+
+.modal-close {
+    margin-left: auto;
+    color: #B33951;
+    font-size: 1.5rem;
+    transition: color .2s ease-in-out;
+}
+
+.modal-close:hover {
+    color: #9B3146;
+}
+
+.d-flex {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+#welcome-message {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    background-color: #212429;
+    border-radius: 5px;
+
+    text-align: center;
+}
+#welcome-message > h5 {
+    font-size: 1.5rem;
+}
+#welcome-message > p {
+    font-size: 1.25rem;
+}
+
+#recent-transactions > .header {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: .9rem;
+    font-weight: 400;
+}
+
+.transactions {
+    width: 100%;
+}
+
+.transaction {
+    display: flex;
+    align-items: center;
+    margin: 3vh 0;
+}
+
+.transaction i {
+    font-size: 2rem;
+    color: rgb(240, 240, 240);
+    padding: .75rem;
+    margin-right: 1rem;
+    border-radius: 10px;
+    background-color: #212429;
+}
+.transaction-yellow i {
+    background-color: #DEC668;
+}
+.transaction-yellow > .transaction-info p , .transaction-red > .transaction-info p {
+    color: #9B3146 !important;
+}
+.transaction-red i {
+    background-color: #9B3146;
+}
+.transaction-green i {
+    background-color: #5CAD8D;
+}
+.transaction-info h4 {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+.transaction-info p {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+#transaction-time {
+    margin-left: auto;
+    color: rgba(245, 245, 245, 0.8);
+}
+#transactions-home {
+    color: white;
+    text-decoration: none;
+}
+
+.transaction-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+}
+.btn-yellow {
+    background-color: #DEC668 !important;
+}
+.btn-yellow:hover {
+    background-color: #DAC058 !important;
+}
+.btn-red {
+    background-color: #9B3146 !important;
+}
+.btn-red:hover {
+    background-color: #8C2C3F !important;
+}
+.btn-green {
+    background-color: #5CAD8D !important;
+}
+.btn-green:hover {
+    background-color: #52A382 !important;
+}
+
+.btn {
+    width: 100%;
+    margin: 15px auto;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background .2s ease-in-out;
+
+    color: white;
+    background-color: #212429;
+    border: 0;
+    font-size: 1.15rem;
+    padding: .3rem 0;
+}
+.btn:focus {
+    outline: none;
+}
+.btn:active {
+    outline: none;
+    opacity: .9;
+}
+
+.color-green {
+    color: #77BBA0;
+}
+
+
+input {
+    width: 100%;
+    display: block;
+    margin: 1rem 0;
+    padding: .5rem;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    transition: all .2s ease-in-out;
+}
+
+input:focus {
+    outline: none;
+    border-color: rgb(160, 160, 160);
+}
+
+.toggle-visibility {
+    display: none;
+}
+.transaction-menu {
+    transition: all .2s ease-in-out;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./theme.css">
+</head>
+<body>
+
+    <div class="modal">
+        <div class="modal-header">
+            <div class="d-flex">
+                <i class="fas fa-university fa-2x" style="margin-right: 10px;"></i>
+                <h4>ATM</h4>
+
+                <a href="#" class="modal-close" onclick = "onPlayerClickBank(0);">
+                    <i class="fas fa-times-circle"></i>
+                </a>
+            </div>
+        </div>
+        <div id = "welcome-message">
+
+            <a class = "text" id = "bankInfo-placeholder"></a>   
+ 
+        </div>
+
+        <button id="transactions-home" class="btn btn-green" style="width: auto; padding: .25rem .5rem"><i class="fas fa-home fa-fw"></i> Home</button>
+        <div id="recent-transactions">
+            <p class="header">Recent transactions</p>
+            <div class="transactions">
+
+                <a class = "text" id = "recentTransactions-placeholder"></a>
+ 
+            </div>
+        </div>
+        
+        <div id="withdraw" class="toggle-visibility transaction-menu" style="width: 80%; margin: auto;">
+            <form action="" method="POST" id = "withdraw_form" name="withdraw_form">
+                <input type="number" name = "withdraw_amount" id = "withdraw_amount" placeholder="Amount">
+ 
+                <button class="btn btn-yellow" onclick = "onPlayerClickBank(1);">Withdraw</button>
+            </form>
+        </div>
+
+        <div id="deposit" class="toggle-visibility transaction-menu" style="width: 80%; margin: auto;">
+            <form action="" method="POST" id="deposit_form" name="deposit_form">
+                <input type="number" name = "deposit_amount" id = "deposit_amount" placeholder="Amount">
+                
+                <button class="btn btn-green" onclick = "onPlayerClickBank(2);">Deposit</button>
+            </form>
+        </div>
+
+        <div id="transfer" class="toggle-visibility transaction-menu" style="width: 80%; margin: auto;">
+            <form action="" method="POST" id="transfer_form" name="transfer_form">
+                <input type="text" name="transfer_username" id = "transfer_username" placeholder="Username">
+ 
+                <input type="number" name="transfer_amount" id = "transfer_amount" placeholder="Amount">
+                <button class="btn btn-red" onclick = "onPlayerClickBank(3);">Transfer</button>
+            </form>
+        </div>
+        
+        <div class="transaction-buttons">
+            <button class="btn btn-yellow" data-toggle="withdraw"><i class="fas fa-wallet fa-fw"></i> Withdraw</button>
+            <button class="btn btn-green" data-toggle="deposit"><i class="fas fa-briefcase fa-fw"></i> Deposit</button>
+            <button class="btn btn-red" data-toggle="transfer"><i class="fas fa-share fa-fw"></i> Transfer</button>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+    <script src="bank.js"></script>
+</body>
+</html>

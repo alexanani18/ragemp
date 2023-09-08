@@ -1,0 +1,145 @@
+<!DOCTYPE html> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css"> 
+
+    <script src="store24.js"></script>  
+</head>
+<body>
+    <div class="modal">
+        <div class="modal-header">
+            <h1>Shop 24/7</h1>
+            <i class="fas fa-times-circle fa-fw" id="modal-close" onclick = "playerClickStore(0, currentItem.name, currentItem.price);" style="margin-left: auto;"></i> 
+        </div>
+        <hr>
+        <div class="modal-body">
+            
+            <div class="items-list">
+                <div class="item" data-price="1000">
+                    <img src="./imgs/iphone.svg" alt="Iphone">
+                    <div class="info">
+                        <h4>Phone</h4>
+                    </div>
+                </div>
+
+                <div class="item" data-price="5000">
+                    <img src="./imgs/sim-card.svg" alt="Sim Card">
+                    <div class="info">
+                        <h4>Sim Card</h4>
+                    </div>
+                </div>
+
+                <div class="item" data-price="1250">
+                    <img src="./imgs/burger.svg" alt="Hamburger">
+                    <div class="info">
+                        <h4>Hamburger</h4>
+                    </div>
+                </div>
+                
+                <div class="item" data-price="50">
+                    <img src="./imgs/drink-water.svg" alt="Water Bottle">
+                    <div class="info">
+                        <h4>Water Bottle</h4>
+                    </div>
+                </div>
+ 
+
+                <div class="item" data-price="1500">
+                    <img src="./imgs/gas-can.svg" alt="Gas Can" itemID = "2">
+                    <div class="info">
+                        <h4>Gas Can</h4>
+                    </div>
+                </div>
+ 
+            </div>
+            <div class="current-item">
+                <div id="icon-parent">
+                    <img src="./imgs/iphone.svg" alt="Iphone" itemID = "1">
+                    <h2>Phone</h2>
+                    <p></p>
+                    <div class="buttons">
+                        <button class="btn" id="buy-btn"><i class="fas fa-money-bill-wave fa-fw"></i> Cash</button>
+                        <button class="btn btn-card" id="buy-btn"><i class="fas fa-credit-card fa-fw"></i> Card</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        const items = document.querySelectorAll('.item');
+        const itemPlaceholder = document.querySelector('.current-item');
+        const iconPlace = document.querySelector('#icon-parent');
+        const buyButtons = document.querySelectorAll('#buy-btn');
+
+        const modalClose = document.querySelector('#modal-close');
+        const modal = document.querySelector('.modal');
+
+        let currentItem = {name: null, price: 0};
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const item = items[0];
+            const {price} = item.dataset;
+            const productName = item.querySelector('.info > h4').innerHTML;
+            const icon = item.querySelector('img').cloneNode(true);
+            updatePlaceHolder({name: productName, price: Number(price), itemID: item.itemID}, icon);
+        });
+
+        modalClose.addEventListener('click', (e) => {
+            modal.classList.add('hide');
+        });
+
+        items.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const {price} = item.dataset;
+                const productName = item.querySelector('.info > h4').innerHTML;
+                const icon = item.querySelector('img').cloneNode(true);
+                updatePlaceHolder({name: productName, price: Number(price), itemID: item.itemID}, icon);
+            });
+        });
+
+        buyButtons.forEach((btn, idx) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                OnPlayerBuysItem(idx, e);
+            });
+        });
+
+
+        function updatePlaceHolder(item = {}, icon) {
+            if(!item.name || !item.price)
+                return;
+            itemPlaceholder.querySelector('h2').innerHTML = item.name;
+            itemPlaceholder.querySelector('p').innerHTML = '$' + item.price;
+
+            itemPlaceholder.querySelector('img').remove();
+            iconPlace.insertBefore(icon, iconPlace.querySelector('h2'));
+
+            currentItem = {name: item.name, price: item.price, itemID: item.itemID};
+        }
+
+        function OnPlayerBuysItem(type, btn) {
+            if(currentItem.name === null || currentItem.price === null)
+                return;
+             
+            var optionID = 0;
+
+            switch(currentItem.name)
+            { 
+                case "Hamburger": optionID = 500; break;
+                case "Water Bottle": optionID = 501; break;
+                case "Gas Can": optionID = 502; break;
+                case "Phone": optionID = 503; break;
+                case "Sim Card": optionID = 504; break;
+            }
+  
+            playerClickStore(1, currentItem.name, currentItem.price, type, optionID);
+        }
+
+    </script> 
+</body>
+</html>

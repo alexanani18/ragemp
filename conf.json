@@ -1,0 +1,12 @@
+{
+	"maxplayers" : 100,
+	"language": "en",
+	"url": "https://discord.me/rage/",
+	"name" : "Learning Server", 
+	"gamemode" : "roleplay", 
+	"stream-distance" : 500.0,
+        "bind": "127.0.0.1",
+	"announce" : false,
+	"port": 22005,
+        "voice-chat" : true 
+}

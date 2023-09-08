@@ -1,0 +1,98 @@
+﻿*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    margin: 0;
+    padding: 0;
+}
+
+body,html 
+{ 
+    width: 100%; height: 100%;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;                     
+}
+ 
+.icon { display: block; position: relative; padding: 10px 8px; margin: 10px 5px 0 5px; width: 30px; height: 30px; border-radius: 100px; overflow: hidden; background: rgba(0,0,0,0.35); }
+
+.icon i { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); color: #FFF; z-index: 11; font-size: 15px; }
+ 
+.icon span { display: block; position: absolute; left: 50%; bottom: 0; transform: translate(-50%,0); width: 100%; height: 100%; }
+
+.icon.text { display: inline-block; overflow: visible; width: auto; padding: 0; } 
+.icon.text i { display: inline-block; float: left; transform: translate(0%, 0%); left: 0; top: 0; position: relative; padding: 10px 8px; width: 30px; height: 30px; border-radius: 100px; color: #ffffff; }
+.icon.text i:before { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); }
+.icon.text span { position: relative; width: auto; height: auto; left: 0; transform: translate(0,0); display: inline-block; font-size: 12px; padding: 7px 15px 0 10px; font-weight: 700; color: #ffffff; }
+ 
+.icon.dying:not(.customstatus) span { animation: trew-status-blink 500ms infinite; }
+.icon.pulse i { animation: trew-pulse 500ms 1; }
+
+ 
+.info { position: absolute; } 
+.info.player { top: 60px; right: 30px; text-align: right;}
+  
+.info.player #money div[id] { float: right; } 
+
+.info.player #money { clear: both; }
+.info.player #money #wallet i { background: linear-gradient(180deg, #128c08 0%, #128c08 100%); }
+.info.player #money #blackMoney i { background: linear-gradient(180deg, #007acc 0%, #007acc 100%); } 
+ 
+.info.player #status { clear: both; }
+.info.player #status ul { margin: 10px 0 0 0; }
+.info.player #status ul li { float: right;}
+.info.player #status ul li#health span { background: linear-gradient(180deg, #ff1a1a 0%, #ff1a1a 100%); }
+.info.player #status ul li#armor span { background: linear-gradient(180deg, #0bcfe6 0%, #0aa3b5 100%); } 
+.info.player #status ul li#hunger span { background: linear-gradient(180deg, #ff8000 0%, #cd6700 100%); }
+.info.player #status ul li#thirst span { background: linear-gradient(180deg, #00c3ff 0%, #008fbb 100%); }
+.info.player #status ul li#health.dead { animation: trew-pulse 500ms infinite; }
+.info.player #status ul li#health.dead span { height: 0 !important; }
+.info.player #status ul li#health.dead i.fas:before { content: '\f714'; }
+ 
+.info.radio { bottom: 19px; right: 35px; z-index: 11; top: 2.5%;} 
+.info.radio #voice { width: 35px; height: 35px; border-radius: 50%; overflow: hidden; background: #ff1a1a; text-align: center; padding: 7px 0 0 0; transition: all 0.1s linear; }
+ 
+.info.radio #voice i.fas { font-size: 18px; color: #FFF; }
+.info.radio #voice.speak { animation: trew-soundwave 1s infinite; }
+
+.info.time-and-place { position: absolute; bottom: 18px; right: 40px; top: 2.5%; height: 35px; font-size: 11px; color: #FFF; background: rgba(68, 56, 56, 0.35); border-radius: 100px; text-align: right; }
+
+.info.time-and-place .data { position: relative; left: -5%; top: 50%; transform: translate(0,-50%); }
+.info.time-and-place .data div { padding: 0 25px;  }
+
+.info.wanted { display: none; position: absolute; bottom: 18px; right: 35px; top: 14%; height: 38px; font-size: 12px; color: #FFF; background: rgba(0,0,0,0.35); border-radius: 100px; text-align: center; }
+.info.wanted .wanted { position: relative; top: 50%; transform: translate(0,-50%); }
+.info.wanted .wanted div { padding: 0 25px;  }
+
+ 
+.info.trucker-job { display: none; position: absolute; bottom: 18px; left: 50px; top: 75%; height: 35px; width: 269px; font-size: 11px; color: #FFF; background: rgba(0,0,0,0.35); border-radius: 100px; text-align: left; }
+
+.info.trucker-job .data { position: relative;  top: 50%; transform: translate(0,-50%); }
+.info.trucker-job .data div { padding: 0 25px; }
+
+.info.truckerIcon { display: none; bottom: 18px; left: 285px; z-index: 11; top: 75%;} 
+.info.truckerIcon #icon { width: 35px; height: 35px; border-radius: 50%; overflow: hidden; background: #0066ff; text-align: center; padding: 7px 0 0 0; transition: all 0.1s linear; }
+ 
+.info.truckerIcon #icon i.fas { font-size: 18px; color: #FFF; }
+.info.truckerIcon #icon.brief { animation: trew-soundwave 1s infinite; }
+
+ 
+.info.find-player { display: none; position: absolute; bottom: 18px; left: 50px; top: 70%; height: 35px; width: 269px; font-size: 11px; color: #FFF; background: rgba(0,0,0,0.35); border-radius: 100px; text-align: left; }
+
+.info.find-player .data { position: relative;  top: 50%; transform: translate(0,-50%); }
+.info.find-player .data div { padding: 0 25px; }
+
+.info.find-icon { display: none; bottom: 18px; left: 285px; z-index: 11; top: 70%;} 
+.info.find-icon #icon { width: 35px; height: 35px; border-radius: 50%; overflow: hidden; background: #0066ff; text-align: center; padding: 7px 0 0 0; transition: all 0.1s linear; }
+ 
+.info.find-icon #icon i.fas { font-size: 18px; color: #FFF; }
+.info.find-icon #icon.brief { animation: trew-soundwave 1s infinite; } 

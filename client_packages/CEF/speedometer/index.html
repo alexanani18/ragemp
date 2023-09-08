@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speedometer</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900&display=swap" id="font">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="style.css">
+     
+</head>
+    <body> 
+
+        <div class = "global">
+
+            <div class="app" id = "placeholder1">
+                <div class="round-progress">
+                    <div class="round-overflow">
+                        <div class="bar" id="speedBar"></div>
+                    </div>
+        
+                    <div class="round-info">
+        
+                        <a id="speedText" style="font-size: 50px; font-family: 'Montserrat'; font-weight: 500; text-shadow: 0 0 4px #BDBDBD; color: #BDBDBD;">0</a>
+        
+                        <br>
+                    
+                        <a id="kilometers" style="font-size: 15px; font-family: 'Montserrat'; font-weight: 700; text-shadow: 0 0 4px #BDBDBD; color: #BDBDBD;">KM/H</a>
+                    </div>  
+                    
+                </div>  
+            </div>
+        
+            <div class="info player"> 
+                    
+                <div id="status">
+                    <ul>
+                        <li class="icon" id="lights">
+                            <i><img src="img/vehicle-lights.png"></i><span></span>
+                        </li> 
+
+                        <li class="icon" id="seatbelt">
+                            <i><img src="img/vehicle-seatbelt.png"></i><span></span>
+                        </li> 
+        
+
+                        <li class="icon" id="gas">
+                            <i><img src="img/pump.png"></i><span></span>
+                        </li> 
+                        
+                        <li class="icon" id="engine">
+                            <i><img src="img/engine.png"></i><span></span>
+                        </li> 
+                            
+                        <li class="icon" id="lock">
+                            <i><img src="img/lock.png"></i><span></span>
+                        </li> 
+                    </ul>
+                </div>  
+            </div>  
+
+        </div>
+
+    
+        <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/cferdinandi/saferInnerHTML@1/dist/saferInnerHTML.polyfills.min.js"></script>		
+        <script> 
+            const sBar = document.querySelector('#speedBar');
+            const sText = document.querySelector('#speedText');
+            
+            const kmText = document.querySelector('#kilometers');
+    
+            function update(speed, maxSpeed, lightOne, lightTwo) 
+            { 
+                if(speed > maxSpeed)
+                    speed = maxSpeed;
+
+                sBar.style.transform = `rotate(${45 + ((speed / maxSpeed) * 100 * 1.8)}deg)`;
+                sText.innerHTML = speed;
+
+
+                document.querySelector('#lights span').style.background = `${(lightOne == 1 || lightTwo == 1) ? ('#00adff') : ('rgba(68, 56, 56, 0.35)')}`;
+            }
+
+            function update_kilometers(count)
+            {
+                kmText.innerHTML = `${count.toFixed(2)} km`;
+            }
+    
+            function hideSpeedo() 
+            {
+                document.querySelector('.global').style.display = "none";
+            }
+        
+            function showSpeedo(fuel) 
+            {  
+                document.querySelector('.global').style.display = 'block';
+                
+                setFuel(fuel);
+            }
+
+            function setFuel(fuel)
+            {
+                document.querySelector('#gas span').style.height = fuel + '%';
+            }
+        
+            function toggleProp(centura, engine, doors, faruri) 
+            {  
+                //Seat belt 
+                document.querySelector('#seatbelt span').style.background = `${(centura == 1) ? ('#0ca200') : ('rgba(68, 56, 56, 0.35)')}`;
+    
+                //Light
+                document.querySelector('#lights span').style.background = `${(faruri == 1) ? ('#00adff') : ('rgba(68, 56, 56, 0.35)')}`;
+
+                //Doors
+                document.querySelector('#lock span').style.background = `${(doors == 1) ? ('#af0000') : ('rgba(68, 56, 56, 0.35)')}`;
+
+                //Engine
+                document.querySelector('#engine span').style.background = `${(engine == true) ? ('#0ca200') : ('rgba(68, 56, 56, 0.35)')}`; 
+            } 
+        </script> 
+    </body>
+</html>

@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    height: 100vh; 
+    user-select: none;
+}
+
+.global {
+    display: none;
+}
+
+.app {
+    position: absolute;
+    right: 2.5em;
+    top: 0;
+    margin-top: 46.5%;
+}
+ 
+@media(max-height: 1077px) {
+  .app {
+    margin-top: 45.5%;
+  }
+}
+
+.round-progress {
+    position: relative;
+    text-align: center;
+}
+
+.round-overflow {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    margin-bottom: -25px;
+    overflow: hidden;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 6px solid #BDBDBD;
+    border-bottom-color: #ff2f00;
+    border-right-color: #ff2f00;
+    transform: rotate(45deg);
+    transition: all .1s linear;
+}
+
+ 
+.round-info {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    padding: 1%;
+    transform: translateX(-50%);
+}
+ 
+
+.icon { position: relative; padding: 10px 8px; margin: 10px 12px 0 5px; width: 15px; height: 10px; border-radius: 100px; overflow: hidden; background: rgba(0,0,0,0.35); }
+.icon i { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); color: #FFF; z-index: 11; font-size: 15px; }
+.icon span { display: block; position: absolute; left: 50%; bottom: 0; transform: translate(-50%,0); width: 100%; height: 100%; }
+
+
+.info { position: absolute; } 
+
+.info.player {
+    position: absolute;
+    top: 0;
+    margin-top: 51%;
+    right: 1em;
+    text-align: right;
+}
+
+@media(max-height: 1077px) {
+  .info.player {
+    margin-top: 50%;
+  }
+}
+
+.info.player #status { clear: both;  }
+.info.player #status ul { margin: 10px 0 0 0; }
+.info.player #status ul li { float: left;}  
+
+.info.player #status ul li#gas span { background: linear-gradient(180deg, #ff8000 0%, #ff8000 100%); }
+.info.player #status ul li#gas.dead { animation: trew-pulse 500ms infinite; }
+.info.player #status ul li#gas.dead span { height: 0 !important; }
+.info.player #status ul li#gas.dead i.fas:before { content: '\f714'; }
+
+.info.player #status ul li#seatbelt span { background: rgba(68, 56, 56, 0.35); }
+.info.player #status ul li#lights span { background: rgba(68, 56, 56, 0.35); }
+.info.player #status ul li#engine span { background:rgba(68, 56, 56, 0.35); }
+.info.player #status ul li#lock span { background: #ff2f00; } 

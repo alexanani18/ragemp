@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head> 
+		<style type="text/css">
+			html body {
+				background-color: rgba(0, 0, 0, 0.0); 
+				user-select: none;  
+			}
+
+			body .container {
+				margin-top: 20%;
+			} 
+ 
+			.category.active {
+				background-color: #2d3239;
+			    border-radius: 200px; 
+			} 
+		</style> 
+
+		<!-- Fontawesome CDN -->
+		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		
+		<!-- Bootstrap 4 CDN -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+ 
+	</head>
+
+	<body>
+		<div class="container ">
+			<div class="row mx-auto align-item-center justify-content-center">
+				<div class="col-md-10">
+
+					<div class="card text-light" style = "background-color: #000000; opacity: 0.8;">
+
+						<h6 class="card-header">
+ 
+							Correct answers: <a style="color: green;" id="true_answer">0</a>/10
+
+						 
+							<span style="float:right;">
+								
+								Wrong answers: <a style="color: red;" id="wrong_answer">0</a>/10
+						
+							</span> 
+						</h6>
+
+						<h6 class="card-body text-center"> 
+
+							<a id = "question_holder">
+
+								Cum procedeaza conducatorul autovehiculului in situatia in care vehiculul din fata sa schimba directia de mers spre stanga, iar pe partea dreapta nu este loc suficient pentru depasire?
+
+							</a>
+ 
+							<hr style="background-color: white; border-radius: 5px;">
+							<br>
+
+							<div class = "category" style="padding: 0.5rem 1rem; cursor: pointer;">1. <a class="question_answer"></a></div> 
+							<div class = "category" style="padding: 0.5rem 1rem; cursor: pointer;">2. <a class="question_answer"></a></div>
+							<div class = "category" style="padding: 0.5rem 0.5rem; cursor: pointer;">3. <a class="question_answer"></a> </div>   
+  
+							<br>
+
+							<hr style="background-color: white; border-radius: 5px;">
+							 
+							<br>
+						  
+							<button onclick = "send_response(1);" style="border-radius: 200px; width: 160px;" type = "button" class = "btn btn-outline-success btn-sm text-center">Send <i class="fa fa-check"></i></button>
+							<button onclick = "send_response(0);" style="border-radius: 200px; width: 160px;" type = "button" class = "btn btn-outline-danger btn-sm text-center">Close <i class="fa fa-times"></i></button> 
+						</h6>
+					</div>
+				</div>
+			</div>
+		</div> 
+
+
+		<script>
+
+			const playerQuestions = [ 
+				["Ce lucru este interzis pe timp de noapte?"], //Question one
+				["Este legal sa tai calea un vehicul?"],
+				["Este legal sa lovesti un vehicul?"],
+				["Este interzis sa depasesti pe linia continua?"],
+				["Daca un pieton traverseaza strada pe trecere aveti obligatia sa ii acordati prioritate?"],
+				["Este interzis sa mariti viteza cand sunteti depasit?"],
+				["Daca un camion a intrat in intersectie ce obligatii aveti?"],
+				["Care este limita legata pe un drum cu un singur sens de mers?"], 
+				["Care este limita legata pe un drum cu mai multe benzi?"],
+				["Abandonarea unui vehicul pe o strada neiluminata este interzisa?"]
+			]; 
+			
+			//Response
+			const playerResponse = [
+
+				["Sa asculti muzica la casetofon.", "Sa conduci cu farurile stinse.", "Sa conduci cu geamurile deschise."],
+				["Nu este ilegal.", "Acest lucru este interzis.", "Legea nu prevede acest lucru."],
+				["Da este legal.", "Acest lucru este interzis.", "Legea nu prevede acest lucru."], 
+				["Legea nu prevede acest lucru.", "Acest lucru este interzis.", "Legea permite acest lucru."],
+				["Acordati prioritate.", "Nu.", "Legea nu prevede acest lucru."],
+				["Doar pana la limita legala.", "Nu, acest lucru nu este interzis.", "Acest lucru este interzis."],
+				["Nici-o obligatie.", "Reduceti viteza si acordati prioritate.", "Reduceti viteza."],
+				["60 km/h.", "40 km/h.", "Nu avem limita."], 
+				["150 km/h.", "100 km/h.", "50 km/h."], 
+				["Acest lucru este interzis.", "Acest lucru este legal.", "Permis doar daca vehiculul are farurile pornite."]
+			];
+
+			//Corect response
+			const responseTrue = [
+
+				["Sa conduci cu farurile stinse."],
+				["Acest lucru este interzis."],
+				["Acest lucru este interzis."],
+				["Acest lucru este interzis."],
+				["Acordati prioritate."],
+				["Acest lucru este interzis."],
+				["Reduceti viteza si acordati prioritate."],
+				["40 km/h."],
+				["150 km/h."],
+				["Acest lucru este interzis."]
+			];
+ 
+			const questionAnswers = document.querySelectorAll('.question_answer');
+			const items = document.querySelectorAll('.category'); 
+
+			var question_response_true = '';
+			var total_questions = 0;
+			var affirmative_responses = 0;
+			var negative_response = 0;
+			var id_clicked = 0;
+
+            function fetchAnswers(question, responseOne, responseTrue, responseThree, affResponse)
+			{ 
+                //QUESTION
+				document.querySelector('#question_holder').innerHTML = question;
+ 
+				//RESPONSES
+				questionAnswers[0].innerHTML = responseOne;
+				questionAnswers[1].innerHTML = responseTrue;
+				questionAnswers[2].innerHTML = responseThree; 
+
+				//AFFIRMATIVE RESPONSE
+				question_response_true = affResponse;
+ 
+				document.querySelector('#true_answer').innerHTML = affirmative_responses; 
+				document.querySelector('#wrong_answer').innerHTML = negative_response; 
+
+				total_questions ++;
+			}
+ 
+			window.addEventListener('DOMContentLoaded', () => {
+ 
+				fetchAnswers(playerQuestions[0], playerResponse[0][0], playerResponse[0][1], playerResponse[0][2], responseTrue[0]); 
+			});
+
+			items.forEach((item, idx) => {
+				item.addEventListener('click', (e) => {
+					 
+					const activeItem = document.querySelector('.category.active');
+            
+					if(activeItem)
+						activeItem.classList.toggle('active');
+					
+					item.classList.toggle('active');
+
+					id_clicked = idx; 
+				});
+			});
+
+			function send_response(option)
+			{ 
+				clickDrivingQuestion(option, total_questions, affirmative_responses, negative_response); 
+
+				if(option == 1)
+				{
+					if(questionAnswers[id_clicked].innerHTML == question_response_true) affirmative_responses ++;
+					else negative_response ++;
+	 
+					fetchAnswers(playerQuestions[total_questions], playerResponse[total_questions][0], playerResponse[total_questions][1], playerResponse[total_questions][2], responseTrue[total_questions]); 
+				}  	 
+			}
+
+
+		</script> 
+
+		<!-- DMV js -->
+		<script src = "index.js"></script>
+		<script src = "https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> 
+
+	</body>
+</html> 

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+
+<head> 
+	<style type="text/css">
+		
+		html body {
+		    background-color: rgba(0, 0, 0, 0.0);
+			user-select: none; 
+			 
+		}
+		body .container {
+			margin-top: 17%;  
+			margin-left: 40%; 
+			opacity: 0.8;
+		}  
+	</style>
+
+	<!-- Fontawesome CDN -->
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
+	<!-- Bootstrap 4 CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
+
+</head>
+
+<body>
+
+	<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="confirm_order">
+		<div class="modal-dialog modal-sm modal-dialog-centered">
+		    <div class="modal-content text-light" style = "background-color: #000000; opacity: 0.8;">
+			    <div class="modal-header">
+					<h6 class="modal-title">Confirm order <i class="fa fa-check"></i></h6>
+			    </div>
+			   
+				<h6 class="modal-body">
+
+					<center>   
+						<button type="button" class="btn btn-success btn-sm" style="border-radius: 5px; width: 120px;" onclick = "clicked_button(3, 0);"><i class="fa fa-money fa-fw"></i> Cash</button>
+						<button type="button" class="btn btn-info btn-sm" style="border-radius: 5px; width: 120px;" onclick = "clicked_button(3, 1);"><i class="fa fa-credit-card fa-fw"></i> Card</button>
+					</center>  
+				</h6>  
+			</div>
+		</div>
+	</div>
+
+     
+	<div class = "container" > 
+		<div class = "row mx-auto align-item-right justify-content">
+			<div class="col-md-3.5 ml-auto">
+
+				<div class = "card text-light" style = "background-color: #000000;">
+ 
+					<h6 class = "card-header text-center">
+						<img src="images/gas-station.png" width = 15px> Gas station
+ 
+					</h6>
+
+					<h6 class = "card-body">
+ 
+						<center>
+
+							<i class="fa fa-question-circle"></i> Info: <span style="color: #009933;">500</span>$ / 1L
+							
+							<br>
+
+							<i class="fa fa-bars"></i> Price: <span id="checkout_info"></span>
+ 
+							<br> <hr>
+
+
+							<div class="progress" style="width: 250px;">
+ 
+								<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 1%;" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100"></div> 
+							
+							</div>
+
+							<br>
+
+							<button onclick="clicked_button(2);" style="width: 120px;" type="button" class="btn btn-primary btn-sm"><i class="fa fa-minus"></i></button>
+							<button onclick="clicked_button(1);" style="width: 120px;" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>
+							  
+							<br><br><br><br><br><br><hr>
+ 
+							<button data-toggle="modal" data-target="#confirm_order" style="width: 120px;" type="button" class="btn btn-success btn-sm">Fill <i class = "fa fa-check"></i></button>
+							<button onclick="clicked_button(0);" style="width: 120px;" type="button" class="btn btn-danger btn-sm">Close <i class = "fa fa-times"></i></button>
+
+						</center> 
+					</h6>  
+				</div>  
+			</div>
+		</div>
+	</div>
+
+	<script>
+ 
+		var timer = null; 
+
+		const progress = document.querySelector('.progress-bar');
+		const checkout = document.getElementById("checkout_info");
+
+		function clicked_button(option, payOption)
+		{  
+			if(option == 0)
+			{
+				if(timer == null) mp.trigger("onPlayerGasEvent", 0); 
+			}
+			else 
+			{ 
+				mp.trigger("put_gas", option, payOption); 
+			} 
+		}
+
+		function start_fill(liters, payOption)
+		{
+			if(liters <= 0 || timer != null)
+				return;
+
+			$('#confirm_order').modal('hide') 
+
+			var count = 0; 
+			timer = setInterval(() => {
+
+				count ++;
+
+				if(count == 101)
+				{ 
+					//DESTROY INTERVAL
+					clearInterval(timer);
+					timer = null; 
+
+					mp.trigger("onPlayerGasEvent", 1, payOption); 
+				}
+				else progress.style.width = count + '%'; 
+
+			}, 100); 
+        }
+ 
+ 
+	</script>
+ 
+    <!-- Bootstrap 4 Scrips CDN --> 
+	<script src = "gasStation.js"></script> 
+	<script src = "https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
+	<script src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> 
+	<!-- End Bootstrap 4 Scripts CDN-->
+</body>
+
+</html>

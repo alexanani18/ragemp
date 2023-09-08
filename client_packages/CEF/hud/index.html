@@ -1,0 +1,218 @@
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900&display=swap" id="font">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+	<link rel="stylesheet" type="text/css" href="main.css"> 
+</head>
+
+<body style="font-family: 'Montserrat'">
+	<div id="ui"> 
+
+		<div class="info player"> 
+			  
+			<div id="money"> 
+				<div class="icon text" id="blackMoney"><i class="fas fa-credit-card"></i><span>1000</span></div>
+
+				<div class="icon text" id="wallet"><i class="fas fa-dollar-sign"></i><span></span></div>
+			</div> 
+
+			<div id="status">
+				<ul>
+					<li class="icon" id="thirst"><i class="fas fa-tint"></i><span></span></li>
+					<li class="icon" id="hunger"><i class="fas fa-utensils"></i><span></span></li>
+					 
+					<li class="icon" id="armor"><i class="fas fa-shield-alt"></i><span></span></li>
+					<li class="icon" id="health"><i class="fas fa-heart"></i><span></span></li>
+				</ul>
+			</div> 
+		</div>
+ 
+		<div class="info radio">
+			<div id="voice"><i class="fas fa-microphone-alt"></i></div>
+		</div>
+ 
+
+		<div class="info time-and-place">
+			<div class="data">
+				<div id="date">
+					 
+				</div>
+			
+				<div id="location"> 
+					 
+				</div>
+			</div>
+		</div> 
+
+		<div class="info wanted">
+			<div class="wanted">
+				<div id = "wanted">
+
+					<strong>
+							
+						${startText}
+	
+						<br>
+						Wanted expire in <span style = "color: #ff1a1a;">20</span>      
+					
+					</strong> 
+
+
+				</div> 
+			</div>
+		</div>  
+
+		<div class="info trucker-job">
+			<div class="data">
+				<div id="trucker_info">
+					 
+				</div>
+			</div>
+		</div> 
+
+		<div class="info truckerIcon">
+			<div id="icon"><i class="fas fa-briefcase"></i></div>
+		</div>
+
+
+		<div class="info find-player">
+			<div class="data">
+				<div id="find_info">
+
+					<strong> 
+						Player: MihaiADV
+						<br>
+				
+						Distance: <a style="color: #ff6600;">1.200km</a>  
+					</strong> 
+					 
+				</div>
+			</div>
+		</div> 
+
+		<div class="info find-icon">
+			<div id="icon"><i class="fas fa-street-view"></i></div>
+		</div>
+
+	</div>
+  
+    <script src="hud.js"></script>	
+	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/saferInnerHTML@1/dist/saferInnerHTML.polyfills.min.js"></script>	
+
+	<script> 
+
+		function set_health(health)
+		{
+			//Health
+			document.querySelector('#health span').style.height = health + '%';
+
+			//Armour
+			//document.querySelector('#armor span').style.height = armour + '%';
+		}
+
+
+        function updateProgress(health, armour, hunger, thirst)
+        { 
+            //Health
+			document.querySelector('#health span').style.height = health + '%';
+
+			//Armour
+			document.querySelector('#armor span').style.height = armour + '%';
+ 
+            //Hunder
+			document.querySelector('#hunger span').style.height = hunger + '%';
+            
+            //Thirst
+			document.querySelector('#thirst span').style.height = thirst + '%';
+		}  
+		 
+		function isTalking(status) 
+		{  
+			var elem = document.querySelector('.info.radio #voice');
+            elem.style.background =  status; 
+		} 
+
+
+		function updateDate(actualDate, hour)
+		{
+			const dateHolder = document.getElementById("date"); 
+			dateHolder.innerHTML = `<strong>${actualDate} <i class="far fa-calendar-alt"></i></strong>`;
+			
+			const locationHolder = document.getElementById("location"); 
+            locationHolder.innerHTML = `<strong>${hour} <i class="far fa-clock"></i></strong>`;
+		}
+
+	 
+		function updateWanted(wantedLevel, wantedTime)
+		{ 
+			document.querySelector('.info.wanted').style.display = (wantedLevel > 0 ? "block" : "none");  
+ 
+			const wantedHolder = document.getElementById("wanted"); 
+			var startText =
+			`
+				<i class="fa fa-star" style = "color: ${(wantedLevel >= 1 ? '#ff1a1a' : '#ffffff')};" aria-hidden="true"></i> 
+				<i class="fa fa-star" style = "color: ${(wantedLevel >= 2 ? '#ff1a1a' : '#ffffff')};" aria-hidden="true"></i>
+				<i class="fa fa-star" style = "color: ${(wantedLevel >= 3 ? '#ff1a1a' : '#ffffff')};" aria-hidden="true"></i>
+				<i class="fa fa-star" style = "color: ${(wantedLevel >= 4 ? '#ff1a1a' : '#ffffff')};" aria-hidden="true"></i>
+				<i class="fa fa-star" style = "color: ${(wantedLevel >= 5 ? '#ff1a1a' : '#ffffff')};" aria-hidden="true"></i>
+				<i class="fa fa-star" style = "color: ${(wantedLevel >= 6 ? '#ff1a1a' : '#ffffff')};" aria-hidden="true"></i>
+		    `;
+   
+			wantedHolder.innerHTML = `
+			
+				<strong>
+							
+					${startText}
+
+					<br>
+					Wanted expire in <span style = "color: #ff1a1a;">${wantedTime}</span>      
+				
+				</strong> 
+			`;
+		}
+
+
+		function updateMoney(moneyHand, moneyBank)
+		{   
+		    //Money hand
+			document.querySelector('#money #wallet span').innerHTML = `$${moneyHand}`;
+			 
+			//Money hand
+			document.querySelector('#money #blackMoney span').innerHTML = `$${moneyBank}`;
+		}
+ 
+		function set_job_hud_text(city, location)
+		{  
+			document.querySelector('.info.trucker-job').style.display = (city == 0 ? "none" : "block");
+			document.querySelector('.info.truckerIcon').style.display = (location == 0 ? "none" : "block");
+		 
+			const infoHolder = document.getElementById("trucker_info"); 
+			infoHolder.innerHTML = `
+			
+		        <strong> 
+					City: ${city}
+					<br>
+			
+					Location: ${location}
+				</strong> 
+			`;
+		}
+
+		function set_find_hud(text)
+		{  
+			document.querySelector('.info.find-player').style.display = (text == 0 ? "none" : "block");
+			document.querySelector('.info.find-icon').style.display = (text == 0 ? "none" : "block");
+		 
+			const infoHolder = document.getElementById("find_info"); 
+			infoHolder.innerHTML = text;
+		} 
+	</script>
+	 
+</body>
+</html>

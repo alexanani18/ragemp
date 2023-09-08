@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	
+	<!-- Custom Style -->
+
+	<style type="text/css">
+		html body {
+		    background-color: rgba(0, 0, 0, 0.0);
+			user-select: none; 
+		}
+		body .container {
+		    margin-top: 20%;
+			opacity: 0.8; 
+		}  
+
+		.switch {
+			position: relative;
+			display: inline-block;
+			width: 50px;
+			height: 24px;
+		}
+
+		.switch input { 
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #e62e00;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 22px;
+			width: 22px;
+			left: 1px;
+			bottom: 1px;
+			background-color: white;
+			-webkit-transition: .4s;
+			transition: .4s;
+		}
+
+		input:checked + .slider {
+		    background-color: #00cc44;
+		}
+
+		input:focus + .slider {
+		    box-shadow: 0 0 1px #00cc44;
+		}
+
+		input:checked + .slider:before {
+			-webkit-transform: translateX(26px);
+			-ms-transform: translateX(26px);
+			transform: translateX(26px);
+		}
+
+		/* Rounded sliders */
+		.slider.round {
+		    border-radius: 34px;
+		}
+
+		.slider.round:before {
+		    border-radius: 50%;
+		} 
+	</style>
+
+	<!-- Fontawesome CDN -->
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
+	<!-- Bootstrap 4 CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
+
+</head>
+
+<body>
+     
+	<div class = "container">
+		<div class = "row mx-auto align-item-center justify-content-center">
+			<div class = "col-md-5">
+
+				<div class = "card text-light" style = "background-color: #000000;">
+ 
+					<h6 class = "card-header text-center">
+						<i class = "fa fa-bars"></i> Toggle menu  
+ 
+					</h6>
+
+
+					<h6 class="card-body">
+
+						<a id = "tog_options"></a>
+  
+						<center>
+							<br><br><br><br><hr>
+							<button style="width: 250px;" type="button" onclick="close_browser();" class="btn btn-danger btn-sm btn-block"><i class="fa fa-times" aria-hidden="true"></i> Close menu</button>
+						</center> 
+					</h6>  
+				</div>  
+			</div>
+		</div>
+	</div>
+
+	<script> 
+        function open_tog(optionOne, optionTwo)
+		{
+			var toggleoptions = document.querySelector('#tog_options'); 
+			toggleoptions.innerHTML = 
+			`
+			    Helper chat  
+				<span class="float-right">
+					<label class="switch">
+						<input onclick="click_switch(0);" id="check_status0" type="checkbox" ${(optionOne == 1) ? ('checked') : ('')}>
+						<span class="slider round"></span>
+					</label>
+				</span>
+
+				<br><br>
+
+				Group chat  
+				<span class="float-right">
+					<label class="switch">
+						<input onclick="click_switch(1);" id="check_status1" type="checkbox" ${(optionTwo == 1) ? ('checked') : ('')}>
+						<span class="slider round"></span>
+					</label>
+				</span>
+	
+			` ; 
+		} 
+   
+		function click_switch(option)
+		{
+			var status = document.getElementById(`check_status${option}`);
+ 
+			mp.trigger("load_informations", option, status.checked);   
+		}
+		
+		function close_browser()
+		{
+			mp.trigger("destroy_browser");  
+		}
+	</script>  
+
+	<script src="index.js"></script> 
+</body> 
+</html>

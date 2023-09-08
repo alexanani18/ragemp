@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html>
+
+<head> 
+	<style type="text/css">
+		html body {
+		    background-color: rgba(0, 0, 0, 0.0);
+		}
+		body .container {
+		    margin-top:10%;
+		}
+ 
+		#welcome-message {
+			width: 100%;
+			padding: 1rem 1.5rem;
+			margin: 1rem 0;
+			background-color: #0066cc;
+			border-radius: 25px; 
+			text-align: center;
+		}
+		#welcome-message > h3 {
+			font-size: 1.5rem;
+		}
+		#welcome-message > p {
+			font-size: 1.10rem;
+		}
+	</style> 
+
+	<!-- Fontawesome CDN -->
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
+	<!-- Bootstrap 4 CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+	<!-- Others -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	 
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+	<!-- DMV js -->
+	<script src = "index.js"></script>
+</head>
+
+<body>
+	<div class="container ">
+		<div class="row mx-auto align-item-center justify-content-center">
+			<div class="col-md-12">
+
+				<div class="card text-light" style = "background-color: #000000; opacity: 0.8;"> 
+
+					<div class="card-header">
+						<i class="fa fa-car" id = "totalFactionH-placeholder"></i> Driving school  
+					</div>
+
+					<div class="card-body"> 
+						<div id = "welcome-message"> 
+							<h5>Informatii ajutatoare:</h5>  
+						</div> 
+						<br> 
+ 
+						1. Este interzis pe timp de noapte sa circuli cu farurile stinse.
+						<br>
+						<br>
+
+						2. Este interzis sa tai calea unui vehicul.
+						<br>
+						<br>
+
+						3. Este interzis sa lovesti intentionat un vehicul.
+						<br>
+						<br>
+
+						4. Este interzis sa depasesti pe linia continua.
+						<br>
+						<br>
+ 
+						5. Daca un pieton traverseaza strada pe trecere aveti obligatia sa ii acordati prioritate.
+						<br>
+						<br>
+
+						6. Este interzis sa mariti viteza cand sunteti depasit.
+						<br>
+						<br>
+
+						7. Daca un camion a intrat in intersectie reduceti viteza si acordati prioritate.
+						<br>
+						<br>
+
+						8. Limita legala pe drumul cu un singur sens de mers este de 40 km/h.
+						<br>
+						<br>
+
+						9. Limita legala pe drumul cu mai multe benzi de mers este de 150 km/h.
+						<br>
+						<br>
+
+						10. Abandonarea unui vehicul pe o strada neiluminata este interzisa.
+						<hr>
+
+						<center>
+
+							<button type="button" class="btn btn-outline-success" onclick = "clickDrivingQuestion(-1);">Start examen <i class="fa fa-check-circle" aria-hidden="true"></i></button>
+						
+						</center> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+</body>
+</html> 
