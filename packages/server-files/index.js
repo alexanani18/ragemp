@@ -42,6 +42,7 @@ require('./admin/admin6.js');
 require('./admin/admin7.js');
 require('./admin/reports.js');
 require('./admin/need_think.js');
+require('./admin/adminFunctions.js');
 
 //DMV server
 require('./dmv/index.js')   
@@ -65,6 +66,9 @@ require("./server_time/server_time.js");
 
 //Character creator
 require('./charcreator/index.js'); 
+
+//Test function
+require('./testHouse/house.js');
   
 mp.events.add("playerChat", (player, text) =>
 {   
@@ -136,7 +140,6 @@ global.generateRGB = function() {
 	color = color.replace(" ", "");
 	color = color.split(",");
 	return color;
-	console.log('heard');
 }
 
 ////////////////////////////////////////////////////////////////////////////  MYSQL  ////////////////////////////////////////////////////////////////////////////

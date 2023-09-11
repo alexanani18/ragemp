@@ -97,6 +97,8 @@ mp.events.addCommand('veh', (player, _, vehName) => {
     if(!vehName) 
         return sendUsage(player, `/veh [vehicle_name]`);
     const admVehicle = player.createVehicle(player, vehName, player.position, generateRGB(), generateRGB(), player.heading);
+    admVehicle.numberPlateType = 1;
+    admVehicle.numberPlate = "ADMIN";
     if(!player.vehicleValid(vehName))
         return sendMessage(player, 'ff3300', `ERROR:!{ffffff} This vehicle doesn't exist.`);     
     sendAdmins(COLOR_ADMIN, `(Notice):!{ffffff} ${player.name} spawned a ${vehName}.`);

@@ -26,7 +26,7 @@ const atmPosition = [
 //Create ATM 3dText 
 for(let x = 1; x < atmPosition.length; x ++)
 { 
-    mp.labels.new(`ATM ~r~(${x})~s~\nPress ~r~E~s~ key`, new mp.Vector3(atmPosition[x][0], atmPosition[x][1], atmPosition[x][2]),
+    mp.labels.new(`ATM ~s~\nPress ~r~E~s~ key`, new mp.Vector3(atmPosition[x][0], atmPosition[x][1], atmPosition[x][2]),
     {
         los: false,
         font: 4,
@@ -45,15 +45,7 @@ for(let x = 1; x < atmPosition.length; x ++)
     });  
 }
  
-mp.events.addCommand('gotoatm', (player, id) => {   
 
-    if(!id) return sendUsage(player, '/gotoatm [atm id]'); 
-    if(player.data.admin < 2) return player.outputChatBox("You don't have admin level 2.");
-    if(id > atmPosition.length || id < 1) return sendMessage(player, '009933', 'Invalid atm ID.');
- 
-    player.position = new mp.Vector3(atmPosition[id][0], atmPosition[id][1], atmPosition[id][2]);
-    sendAdmins('ff9900', `(Notice):!{ffffff} ${player.name} teleported to atm ${id}.`); 
-}); 
 
 
 mp.events.add("accesingBankBrowser", (player, option) => { 

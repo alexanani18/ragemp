@@ -1,7 +1,7 @@
 # ragemp
 project ragemp
 
-Its a rageMP gamemode MySQL/Nodejs/JS based on MihaiAdv. (English)
+Its a rageMP gamemode MySQL/Nodejs/JS based on MihaiAdv gamemode. (English)
 
 The setup for database is made in "packages/server-files/mysql.js"
 DB have the setup for localhost. Copy of DB you can find in DB_packages.

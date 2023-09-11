@@ -131,11 +131,3 @@ mp.events.add('send_tog_info', (player, option, status) => {
     //MYSQL
     mysql_action(`UPDATE accounts SET ${mysql_variable[option][0]} = ? WHERE username = ?`, [status, player.name]); 
 });
-
-mp.events.add("playerDamage", (player, healthLoss, armorLoss) => {
-
-
-    sendMessage(player, '33bbff', `${healthLoss}`);  
-
-    // Do what you want.
-});

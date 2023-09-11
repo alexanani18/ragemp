@@ -33,8 +33,6 @@ mp.events.add('loadPlayerInventory', (player, playerSQLID) => {
 //Open inventory
 mp.events.add("callPlayerInvetory", (player) => {
  
-    if(!player.inventory.length) return sendMessage(player, 'FFFFFF', `You don't have items in inventory.`);
- 
     openInventory(player);
 }); 
   
@@ -60,7 +58,7 @@ function openInventory(player)
             }, 500);   
         }   
     }   
-    player.call("openInventory", [player.data.drivingLicense, 40, 70, fetchMain, fetchClothes]);  
+    player.call("openInventory", [player.data.drivingLicense, player.data.flyLicense, player.data.boatLicense, fetchMain, fetchClothes]);  
 }
  
 //Use item

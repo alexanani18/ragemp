@@ -161,8 +161,6 @@ mp.events.add('setEngineState', (status, player) => {
     if(status == true)
     {
         player.vehicle.setLights(0);
-
-        mp.gui.chat.push('dezactivated');
     }
 
     if(player.vehicle && !player.vehicle.getIsEngineRunning()) 
@@ -194,11 +192,6 @@ mp.keys.bind(0x32, true, function() {
  
     if(isChatActive() == false) mp.events.callRemote("vehicleStartEngine");	 
 }); 
-
-mp.keys.bind(0x4E, true, function() {
- 
-    if(isChatActive() == false) mp.events.callRemote("lockVehicle");	 
-});  
  
 mp.keys.bind(0x42, true, function() {
   
@@ -240,7 +233,7 @@ mp.events.add('render', () => {
     mp.game.ui.hideHudComponentThisFrame(2);
 
     //LOGO SERVER
-    mp.game.graphics.drawText("sCr mode", [0.93, 0.97], {font: 7, color: [255, 255, 255, 255], scale: [0.5, 0.5], outline: true});
+    mp.game.graphics.drawText("sCr mode 0.1.1 beta", [0.93, 0.97], {font: 7, color: [255, 255, 255, 255], scale: [0.5, 0.5], outline: true});
   
     //FREEZE SISTEM
     if(frozenPlayer == true) 
@@ -291,13 +284,10 @@ mp.events.add('render', () => {
             if(vehicle_stream[vehicle.id])
             {
                 vehicle_stream[vehicle.id].text = '';
-                vehicle_stream[vehicle.id].dimension = -1; 
+                vehicle_stream[vehicle.id].dimension = 1; 
             } 
         }
 	});
-
- 
-    //mp.discord.update('Playing on mihaiadv project', `Players: `);   
 }); 
 
 
@@ -397,3 +387,9 @@ mp.events.add("play_facial_anim", (player, dict, name) => {
 });    
 
   
+let ped = mp.peds.new(
+    mp.game.joaat('u_m_m_jewelthief'), 
+    new mp.Vector3(114.2886962890625, -626.528564453125, 44.22959899902344),
+    103.83,
+    mp.players.local.dimension
+);

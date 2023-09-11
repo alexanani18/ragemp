@@ -219,6 +219,5 @@ module.exports =
                 });
             }
         });
-        console.log(`${player.name} has logged in`);    
     } 
 }

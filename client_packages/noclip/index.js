@@ -39,6 +39,7 @@ mp.keys.bind(bindVirtualKeys.F2, true, function() {
 });
 function startNoClip() {
   mp.game.graphics.notify('NoClip ~g~activated');
+  mp.game.ui.displayRadar(true);
   var camPos = new mp.Vector3(
     localPlayer.position.x,
     localPlayer.position.y,

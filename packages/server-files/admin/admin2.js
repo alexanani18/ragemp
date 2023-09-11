@@ -29,3 +29,25 @@ mp.events.addCommand('gotods', (player) => {
         return player.staffPerms(2);
     player.position = new mp.Vector3(-57.110, -1096.947, 26.422);
 }); 
+
+//Goto ATM
+mp.events.addCommand('gotoatm', (player, id) => {   
+    if(player.data.admin < 2) return player.staffPerms(2);
+    if(!id) return sendUsage(player, '/gotoatm [atm id]'); 
+    if(id > atmPosition.length || id < 1) return sendMessage(player, '009933', 'Invalid atm ID.');
+    player.position = new mp.Vector3(atmPosition[id][0], atmPosition[id][1], atmPosition[id][2]);
+    sendAdmins('ff9900', `(Notice):!{ffffff} ${player.name} teleported to atm ${id}.`); 
+}); 
+
+//Goto biz
+mp.events.addCommand('gotobiz', (player, id) => {
+    if(player.data.admin < 2) 
+        return player.staffPerms(2);
+    if(!id) 
+        return sendUsage(player, '/gotobiz [business id]'); 
+    if(id > loaded_business_count || id < 1) 
+        return sendMessage(player, '009933', 'Invalid business ID.');
+    player.position = new mp.Vector3(struct.business[id - 1].bizzX, struct.business[id - 1].bizzY, struct.business[id - 1].bizzZ);
+    sendAdmins('ff9900', `(Notice):!{ffffff} ${player.name} teleported to business [${id}].`);
+}); 
+

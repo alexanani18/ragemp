@@ -1,7 +1,7 @@
 {
-	"maxplayers" : 100,
+	"maxplayers" : 20,
 	"language": "en",
-	"url": "https://discord.me/rage/",
+	"url": "www.alexscraba.ro",
 	"name" : "Learning Server", 
 	"gamemode" : "roleplay", 
 	"stream-distance" : 500.0,

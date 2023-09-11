@@ -1,0 +1,64 @@
+V 0.1A
+
+= Clear the unused folders from client and server. 
+= Structure some information from client and server (index.js more easy to understand and to read) 
+= Clear DB from unused information. 
+= Fix the bug from DS when you can not change the car. 
+= Fix the bug with "Connection lost" 
+= Add folders for every type of actions (admin, dmv, bank, etc.)
+= Add the DB in folder DB_packages 
+= Fix bug with the dlc cars. 
+= Fix the problem with login.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+V 0.1.1 alpha
+
+= update.txt with all the update made on the server.
+= Add licenses saved in DB (number-hour):
+    -> drivingLicense: driving licenses.
+    -> boatLicense: boat licenses.
+    -> flyLicense: fly licenses.
+    -> gunLicense: gun licenses.
+= adminCommands.js big update.
+    -> admin licenses from 0h to 500h.
+    -> remove ban and kick command. (need to be rewrite)
+    -> add some minors commands.
+    -> agl: give all licenses. (agli id)
+    -> ragl: remove all licenses. (ragl id)
+    -> remove [/va] command.
+    -> remove [/setcolor] command.
+    -> fix eror from [/gotocar]
+    -> remove [/repair] command.
+    -> remove [/sethelper] command.
+    -> fix commands [/warn] and [/unwarn].
+    -> remove [/hc] command.
+    -> remove [/healme] command.
+    -> remove some code lines.
+    -> remove [/helpers] command.
+= remove adminCommand.js and make to category:
+    -> admin1: all commands for admin leve 1.
+    -> admin2: all commands for admin leve 2.
+    -> admin3: all commands for admin leve 3.
+    -> admin4: all commands for admin leve 4.
+    -> admin5: all commands for admin leve 5.
+    -> admin6: all commands for admin leve 6.
+    -> admin7: all commands for admin leve 7 (owner).
+= added [/addvehDS] command (add a vehicle to DS stock. Saved in DB. Admin command level 6.)
+= added the version of server (hidden spot on the phone, heart sign).
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+V 0.1.1 beta
+
+= added [/gotoatm] command. (go to the ATM id. Admin command level 2.)
+= delete the itm id from ATM label.
+= remove clothes store function from server.
+= remove console log with logged id.
+= removed dlc cars that are not showing the car correctly. 
+= fix bug with the reload.
+= add the map visibility to "NoClip"
+= fix bug with inventory (sometimes the inventory open when you press I and sometimes it will not open the inventory)
+= fix bug with [/dl] (still show after the dl was disable)
+= added carPlate and carPlateType to admins cars [/veh]
+= Added ServerMan (posibility to start, restart, stop server).

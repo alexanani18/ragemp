@@ -1,0 +1,30 @@
+/*
+    - Sistem de ban si kick de pe server.
+    - Schimbat login + register.
+    - Adaugata functia de show vehicle
+    - Adaugata functia de spawn/destroy vehicle
+    - Adaugata functia de lock/unlock vehicle
+    - Adaugata functia de vizualizare informatii cand te urci in vehicul 
+    - Adaugat o informatie la gas station pentru a stii cati litri de benzina mai sunt in masina si cati sunt disponibili.
+    - rescris sistemu de dmv.
+    - Adaugare job-uri.
+        - Toate joburile sa aiba treaba una cu alta si sa fie interactiune intre jucatori pentru joburi.
+        - Toate joburile sa aibe interactiune cu business-urile din game sau sa influenteze jocu.
+    - Adaugat o interfata care sa contina mai multe detalii.
+        - status
+        - jobs
+        - help
+        - diverse info
+    - Schimbate interfete la
+        - ds
+        - ah (adminhelp)
+        - bank
+    - De creat un fisier cu constante (mesaje standarde)
+    - De refacut sistemele de biz
+        - gas station
+        - clothes
+        - gunshop
+        - 24/7
+    - Sistem de ajail.
+    
+*/  

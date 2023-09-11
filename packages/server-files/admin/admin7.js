@@ -18,3 +18,11 @@ mp.events.addCommand('setadmin', (player, _, id, adminLevel) => {
     mysql_action('UPDATE `accounts` SET admin = ? WHERE username = ?', [user.data.admin, user.name]);
 }); 
  
+
+//test
+mp.events.addCommand('test123', (player) => {
+    if(player.data.admin < 7)
+        return player.staffPerms(7);
+    
+    player.position = new mp.Vector3(-18.07856, -583.6725, 79.46569);
+}); 
